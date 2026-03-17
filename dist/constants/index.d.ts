@@ -7,3 +7,4 @@ export * from './chat';
 export * from './packages';
 export * from './users';
 export * from './transactions';
+export * from './admin';

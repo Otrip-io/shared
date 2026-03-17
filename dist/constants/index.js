@@ -23,3 +23,4 @@ __exportStar(require("./chat"), exports);
 __exportStar(require("./packages"), exports);
 __exportStar(require("./users"), exports);
 __exportStar(require("./transactions"), exports);
+__exportStar(require("./admin"), exports);
