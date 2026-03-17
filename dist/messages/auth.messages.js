@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AUTH_MESSAGES = void 0;
+exports.AUTH_MESSAGES = {
+    REGISTER_SUCCESS: 'Registration successful! Please check your email for a verification code',
+    LOGIN_SUCCESS: 'Welcome back!',
+    SOCIAL_LOGIN_SUCCESS: 'Welcome back!',
+    SOCIAL_REGISTER_SUCCESS: 'Welcome to Otrip!',
+    VERIFY_OTP_SUCCESS: 'Verification successful',
+    RESEND_OTP_SUCCESS: 'Verification code sent! Please check your email',
+    FORGOT_PASSWORD_SUCCESS: "We've sent a verification code to your email",
+    RESET_PASSWORD_SUCCESS: 'Your password has been reset successfully',
+    REFRESH_TOKEN_SUCCESS: 'Session refreshed successfully',
+    SIGN_OUT_SUCCESS: 'You have been signed out',
+    SIGN_OUT_ALL_SUCCESS: 'You have been signed out from all devices',
+    REACTIVATE_SUCCESS: 'Your account has been reactivated! You can now sign in.',
+    SET_PASSWORD_SUCCESS: 'Password set successfully. You can now sign in with your email and password.',
+};
