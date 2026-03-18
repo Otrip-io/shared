@@ -1,1 +1,27 @@
+# dependencies
 node_modules/
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+
+# Lock files (bun only)
+package-lock.json
+yarn.lock
