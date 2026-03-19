@@ -31,4 +31,16 @@ export declare const BROADCAST_ERRORS: {
         readonly code: "BROADCAST_NOT_DISMISSIBLE";
         readonly message: "This broadcast cannot be dismissed";
     };
+    readonly TEMPLATE_NOT_FOUND: {
+        readonly code: "BROADCAST_TEMPLATE_NOT_FOUND";
+        readonly message: "Broadcast template not found";
+    };
+    readonly VARIANT_GROUP_INCOMPLETE: {
+        readonly code: "BROADCAST_VARIANT_GROUP_INCOMPLETE";
+        readonly message: "A/B test requires both variant A and B";
+    };
+    readonly VARIANT_GROUP_EXISTS: {
+        readonly code: "BROADCAST_VARIANT_GROUP_EXISTS";
+        readonly message: "A variant with this group already exists for this variant letter";
+    };
 };

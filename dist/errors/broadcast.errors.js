@@ -10,4 +10,7 @@ exports.BROADCAST_ERRORS = {
     CANNOT_CANCEL: { code: 'BROADCAST_CANNOT_CANCEL', message: 'Only active or scheduled broadcasts can be cancelled' },
     ALREADY_DISMISSED: { code: 'BROADCAST_ALREADY_DISMISSED', message: 'Broadcast already dismissed' },
     NOT_DISMISSIBLE: { code: 'BROADCAST_NOT_DISMISSIBLE', message: 'This broadcast cannot be dismissed' },
+    TEMPLATE_NOT_FOUND: { code: 'BROADCAST_TEMPLATE_NOT_FOUND', message: 'Broadcast template not found' },
+    VARIANT_GROUP_INCOMPLETE: { code: 'BROADCAST_VARIANT_GROUP_INCOMPLETE', message: 'A/B test requires both variant A and B' },
+    VARIANT_GROUP_EXISTS: { code: 'BROADCAST_VARIANT_GROUP_EXISTS', message: 'A variant with this group already exists for this variant letter' },
 };
