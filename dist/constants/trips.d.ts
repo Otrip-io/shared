@@ -7,7 +7,6 @@ export declare const TRIP_STATUS: {
     readonly PLANNING: "planning";
     readonly ACTIVE: "active";
     readonly COMPLETED: "completed";
-    readonly CANCELLED: "cancelled";
 };
 export type TripStatus = (typeof TRIP_STATUS)[keyof typeof TRIP_STATUS];
 export declare const TRIP_MEMBER_ROLES: {

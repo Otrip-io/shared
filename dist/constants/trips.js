@@ -9,7 +9,6 @@ exports.TRIP_STATUS = {
     PLANNING: 'planning',
     ACTIVE: 'active',
     COMPLETED: 'completed',
-    CANCELLED: 'cancelled',
 };
 exports.TRIP_MEMBER_ROLES = {
     ADMIN: 'admin',
