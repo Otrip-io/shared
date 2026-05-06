@@ -5,6 +5,7 @@ export * from './genders';
 export * from './trips';
 export * from './chat';
 export * from './packages';
+export * from './package-media';
 export * from './users';
 export * from './transactions';
 export * from './admin';

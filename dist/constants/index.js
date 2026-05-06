@@ -21,6 +21,7 @@ __exportStar(require("./genders"), exports);
 __exportStar(require("./trips"), exports);
 __exportStar(require("./chat"), exports);
 __exportStar(require("./packages"), exports);
+__exportStar(require("./package-media"), exports);
 __exportStar(require("./users"), exports);
 __exportStar(require("./transactions"), exports);
 __exportStar(require("./admin"), exports);
