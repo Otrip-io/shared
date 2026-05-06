@@ -14,6 +14,12 @@ export declare const PACKAGE_MEDIA: {
         readonly maxAspect: 1.9;
         readonly accept: readonly ["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"];
     };
+    readonly reelThumbnail: {
+        readonly maxBytes: 10485760;
+        readonly minWidth: 720;
+        readonly minHeight: 1280;
+        readonly accept: readonly ["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"];
+    };
     readonly reel: {
         readonly maxBytes: 209715200;
         readonly maxDurationSec: 60;

@@ -10,11 +10,17 @@ exports.PACKAGE_MEDIA = {
         accept: ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'],
     },
     thumbnail: {
-        maxBytes: 10_485_760, // 10 MB
+        maxBytes: 10_485_760, // 10 MB — cover / trailer poster (landscape)
         minWidth: 1280,
         minHeight: 720,
         minAspect: 1.6, // ~16:9
         maxAspect: 1.9,
+        accept: ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'],
+    },
+    reelThumbnail: {
+        maxBytes: 10_485_760, // 10 MB — reel poster (portrait)
+        minWidth: 720,
+        minHeight: 1280,
         accept: ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'],
     },
     reel: {
