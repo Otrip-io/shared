@@ -21,3 +21,17 @@ export const TRIP_MEMBER_ROLES = {
 export type TripMemberRole = (typeof TRIP_MEMBER_ROLES)[keyof typeof TRIP_MEMBER_ROLES];
 
 export const MAX_TRIP_MEMBERS = 50;
+
+export function getTripStatus(
+  startDate: Date | string | null | undefined,
+  endDate: Date | string | null | undefined,
+): TripStatus {
+  if (!startDate || !endDate) return TRIP_STATUS.PLANNING;
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  end.setHours(23, 59, 59, 999);
+  if (start > now) return TRIP_STATUS.PLANNING;
+  if (end >= now) return TRIP_STATUS.ACTIVE;
+  return TRIP_STATUS.COMPLETED;
+}
