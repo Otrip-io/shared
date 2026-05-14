@@ -15,6 +15,7 @@ export declare const USER_ACCOUNT_STATUS: {
     readonly ACTIVE: "active";
     readonly SUSPENDED: "suspended";
     readonly DELETED: "deleted";
+    readonly BANNED: "banned";
 };
 export type UserAccountStatus = (typeof USER_ACCOUNT_STATUS)[keyof typeof USER_ACCOUNT_STATUS];
 export declare const SOCIAL_PROVIDERS: {

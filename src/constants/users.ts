@@ -19,6 +19,7 @@ export const USER_ACCOUNT_STATUS = {
   ACTIVE: 'active',
   SUSPENDED: 'suspended',
   DELETED: 'deleted',
+  BANNED: 'banned',
 } as const;
 
 export type UserAccountStatus = (typeof USER_ACCOUNT_STATUS)[keyof typeof USER_ACCOUNT_STATUS];

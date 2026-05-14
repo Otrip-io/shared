@@ -16,6 +16,7 @@ exports.USER_ACCOUNT_STATUS = {
     ACTIVE: 'active',
     SUSPENDED: 'suspended',
     DELETED: 'deleted',
+    BANNED: 'banned',
 };
 exports.SOCIAL_PROVIDERS = {
     GOOGLE: 'google',
