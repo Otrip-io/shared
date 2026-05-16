@@ -3,6 +3,7 @@ export const ADMIN_FEATURES = {
   CONTENT: 'content',
   OPERATIONS: 'operations',
   SYSTEM: 'system',
+  SOCIAL_MEDIA: 'social_media',
 } as const;
 
 export type AdminFeature = (typeof ADMIN_FEATURES)[keyof typeof ADMIN_FEATURES];

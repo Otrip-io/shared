@@ -6,5 +6,6 @@ exports.ADMIN_FEATURES = {
     CONTENT: 'content',
     OPERATIONS: 'operations',
     SYSTEM: 'system',
+    SOCIAL_MEDIA: 'social_media',
 };
 exports.ADMIN_FEATURE_VALUES = Object.values(exports.ADMIN_FEATURES);
