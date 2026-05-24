@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_VISIBILITY = void 0;
+exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
@@ -14,6 +14,11 @@ exports.TRIP_STATUS = {
 exports.TRIP_MEMBER_ROLES = {
     ADMIN: 'admin',
     VIEWER: 'viewer',
+};
+exports.TRIP_MEMBER_STATUS = {
+    ACTIVE: 'active',
+    REQUEST: 'request',
+    INVITE: 'invite',
 };
 exports.MAX_TRIP_MEMBERS = 50;
 function getTripStatus(startDate, endDate) {

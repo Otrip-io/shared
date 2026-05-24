@@ -20,6 +20,14 @@ export const TRIP_MEMBER_ROLES = {
 
 export type TripMemberRole = (typeof TRIP_MEMBER_ROLES)[keyof typeof TRIP_MEMBER_ROLES];
 
+export const TRIP_MEMBER_STATUS = {
+  ACTIVE: 'active',
+  REQUEST: 'request',
+  INVITE: 'invite',
+} as const;
+
+export type TripMemberStatus = (typeof TRIP_MEMBER_STATUS)[keyof typeof TRIP_MEMBER_STATUS];
+
 export const MAX_TRIP_MEMBERS = 50;
 
 export function getTripStatus(

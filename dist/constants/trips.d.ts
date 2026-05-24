@@ -14,5 +14,11 @@ export declare const TRIP_MEMBER_ROLES: {
     readonly VIEWER: "viewer";
 };
 export type TripMemberRole = (typeof TRIP_MEMBER_ROLES)[keyof typeof TRIP_MEMBER_ROLES];
+export declare const TRIP_MEMBER_STATUS: {
+    readonly ACTIVE: "active";
+    readonly REQUEST: "request";
+    readonly INVITE: "invite";
+};
+export type TripMemberStatus = (typeof TRIP_MEMBER_STATUS)[keyof typeof TRIP_MEMBER_STATUS];
 export declare const MAX_TRIP_MEMBERS = 50;
 export declare function getTripStatus(startDate: Date | string | null | undefined, endDate: Date | string | null | undefined): TripStatus;
