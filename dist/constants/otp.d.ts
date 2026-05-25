@@ -5,7 +5,6 @@ export declare const OTP_CONTEXTS: {
     readonly CHANGE_USERNAME: "change_username";
     readonly DELETE_ACCOUNT: "delete_account";
     readonly RECOVERY_EMAIL: "recovery_email";
-    readonly LOGIN_FALLBACK: "login_fallback";
 };
 export type OtpContext = (typeof OTP_CONTEXTS)[keyof typeof OTP_CONTEXTS];
 export declare const OTP_TTL_MINUTES = 5;

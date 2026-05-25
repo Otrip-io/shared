@@ -8,7 +8,6 @@ exports.OTP_CONTEXTS = {
     CHANGE_USERNAME: 'change_username',
     DELETE_ACCOUNT: 'delete_account',
     RECOVERY_EMAIL: 'recovery_email',
-    LOGIN_FALLBACK: 'login_fallback',
 };
 exports.OTP_TTL_MINUTES = 5;
 exports.RESET_TOKEN_TTL_MINUTES = 30;
@@ -23,5 +22,4 @@ exports.OTP_DAILY_LIMITS = {
     change_username: 3,
     delete_account: 3,
     recovery_email: 3,
-    login_fallback: 5,
 };

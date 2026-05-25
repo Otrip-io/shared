@@ -5,7 +5,6 @@ export const OTP_CONTEXTS = {
   CHANGE_USERNAME: 'change_username',
   DELETE_ACCOUNT: 'delete_account',
   RECOVERY_EMAIL: 'recovery_email',
-  LOGIN_FALLBACK: 'login_fallback',
 } as const;
 
 export type OtpContext = (typeof OTP_CONTEXTS)[keyof typeof OTP_CONTEXTS];
@@ -25,5 +24,4 @@ export const OTP_DAILY_LIMITS: Record<string, number> = {
   change_username: 3,
   delete_account: 3,
   recovery_email: 3,
-  login_fallback: 5,
 };
