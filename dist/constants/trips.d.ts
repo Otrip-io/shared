@@ -3,6 +3,23 @@ export declare const TRIP_VISIBILITY: {
     readonly PRIVATE: "private";
 };
 export type TripVisibility = (typeof TRIP_VISIBILITY)[keyof typeof TRIP_VISIBILITY];
+/**
+ * A trip's kind. Behind the scenes an expense group, a shared list, or a doc
+ * is just a Trip with a single active module — one entity, one members model,
+ * one offline-sync path. `trip` is the full multi-module travel trip (the only
+ * kind that can be public/discoverable). New kinds are private-only utilities.
+ *
+ * Backward-compat (Work Rule 10): the field defaults to `trip`, so every
+ * existing trip document and every old client (which never sends `type`) keeps
+ * behaving exactly as before.
+ */
+export declare const TRIP_TYPE: {
+    readonly TRIP: "trip";
+    readonly EXPENSE: "expense";
+    readonly LIST: "list";
+    readonly DOCS: "docs";
+};
+export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
 export declare const TRIP_STATUS: {
     readonly PLANNING: "planning";
     readonly ACTIVE: "active";

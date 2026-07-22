@@ -1,10 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_VISIBILITY = void 0;
+exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
     PRIVATE: 'private',
+};
+/**
+ * A trip's kind. Behind the scenes an expense group, a shared list, or a doc
+ * is just a Trip with a single active module — one entity, one members model,
+ * one offline-sync path. `trip` is the full multi-module travel trip (the only
+ * kind that can be public/discoverable). New kinds are private-only utilities.
+ *
+ * Backward-compat (Work Rule 10): the field defaults to `trip`, so every
+ * existing trip document and every old client (which never sends `type`) keeps
+ * behaving exactly as before.
+ */
+exports.TRIP_TYPE = {
+    TRIP: 'trip',
+    EXPENSE: 'expense',
+    LIST: 'list',
+    DOCS: 'docs',
 };
 exports.TRIP_STATUS = {
     PLANNING: 'planning',

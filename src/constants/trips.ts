@@ -5,6 +5,25 @@ export const TRIP_VISIBILITY = {
 
 export type TripVisibility = (typeof TRIP_VISIBILITY)[keyof typeof TRIP_VISIBILITY];
 
+/**
+ * A trip's kind. Behind the scenes an expense group, a shared list, or a doc
+ * is just a Trip with a single active module — one entity, one members model,
+ * one offline-sync path. `trip` is the full multi-module travel trip (the only
+ * kind that can be public/discoverable). New kinds are private-only utilities.
+ *
+ * Backward-compat (Work Rule 10): the field defaults to `trip`, so every
+ * existing trip document and every old client (which never sends `type`) keeps
+ * behaving exactly as before.
+ */
+export const TRIP_TYPE = {
+  TRIP: 'trip',
+  EXPENSE: 'expense',
+  LIST: 'list',
+  DOCS: 'docs',
+} as const;
+
+export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
+
 export const TRIP_STATUS = {
   PLANNING: 'planning',
   ACTIVE: 'active',
