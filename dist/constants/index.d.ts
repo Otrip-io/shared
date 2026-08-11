@@ -3,6 +3,7 @@ export * from './otp';
 export * from './tokens';
 export * from './genders';
 export * from './trips';
+export * from './documents';
 export * from './chat';
 export * from './packages';
 export * from './package-media';

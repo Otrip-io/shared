@@ -19,6 +19,7 @@ __exportStar(require("./otp"), exports);
 __exportStar(require("./tokens"), exports);
 __exportStar(require("./genders"), exports);
 __exportStar(require("./trips"), exports);
+__exportStar(require("./documents"), exports);
 __exportStar(require("./chat"), exports);
 __exportStar(require("./packages"), exports);
 __exportStar(require("./package-media"), exports);
