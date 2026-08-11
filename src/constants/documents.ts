@@ -4,38 +4,41 @@
  * A document belongs to a USER, not to a trip — `tripId` is an optional link
  * ("Attach to trip · optional"). That is why this lives beside TRIP_TYPE rather
  * than inside it: a passport is not a trip.
+ *
+ * The list is deliberately SHORT. A passport, an ID card and a driving licence
+ * are one thing to the person carrying them — `identity` — and every document
+ * that doesn't fit a named type belongs in `other` rather than being forced
+ * into the nearest wrong one, which is what makes the categories mean anything.
  */
 
 export const DOCUMENT_TYPE = {
-  PASSPORT: 'passport',
+  /** Passport, national ID card, driving licence — "my ID". */
+  IDENTITY: 'identity',
   VISA: 'visa',
   FLIGHT_TICKET: 'flight_ticket',
   HOTEL_BOOKING: 'hotel_booking',
   INSURANCE: 'insurance',
-  VACCINATION: 'vaccination',
-  ID_CARD: 'id_card',
-  DRIVERS_LICENSE: 'drivers_license',
+  /** The catch-all: train tickets, car rental, tours, medical letters, … */
+  OTHER: 'other',
 } as const;
 
 export type DocumentType = (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE];
 
-/** The order the 8 type cards are drawn in on 23f, left→right, top→bottom. */
+/** The order the type cards are drawn in on 23f, left→right, top→bottom. */
 export const DOCUMENT_TYPES: readonly DocumentType[] = [
-  DOCUMENT_TYPE.PASSPORT,
+  DOCUMENT_TYPE.IDENTITY,
   DOCUMENT_TYPE.VISA,
   DOCUMENT_TYPE.FLIGHT_TICKET,
   DOCUMENT_TYPE.HOTEL_BOOKING,
   DOCUMENT_TYPE.INSURANCE,
-  DOCUMENT_TYPE.VACCINATION,
-  DOCUMENT_TYPE.ID_CARD,
-  DOCUMENT_TYPE.DRIVERS_LICENSE,
+  DOCUMENT_TYPE.OTHER,
 ];
 
 export const DOCUMENT_CATEGORY = {
   IDENTITY: 'identity',
   BOOKINGS: 'bookings',
   INSURANCE: 'insurance',
-  HEALTH: 'health',
+  OTHER: 'other',
 } as const;
 
 export type DocumentCategory = (typeof DOCUMENT_CATEGORY)[keyof typeof DOCUMENT_CATEGORY];
@@ -46,19 +49,24 @@ export type DocumentCategory = (typeof DOCUMENT_CATEGORY)[keyof typeof DOCUMENT_
  * on the filing; a second copy of this map would eventually disagree.
  */
 export const DOCUMENT_TYPE_CATEGORY: Readonly<Record<DocumentType, DocumentCategory>> = {
-  [DOCUMENT_TYPE.PASSPORT]: DOCUMENT_CATEGORY.IDENTITY,
+  [DOCUMENT_TYPE.IDENTITY]: DOCUMENT_CATEGORY.IDENTITY,
   [DOCUMENT_TYPE.VISA]: DOCUMENT_CATEGORY.IDENTITY,
-  [DOCUMENT_TYPE.ID_CARD]: DOCUMENT_CATEGORY.IDENTITY,
-  [DOCUMENT_TYPE.DRIVERS_LICENSE]: DOCUMENT_CATEGORY.IDENTITY,
   [DOCUMENT_TYPE.FLIGHT_TICKET]: DOCUMENT_CATEGORY.BOOKINGS,
   [DOCUMENT_TYPE.HOTEL_BOOKING]: DOCUMENT_CATEGORY.BOOKINGS,
   [DOCUMENT_TYPE.INSURANCE]: DOCUMENT_CATEGORY.INSURANCE,
-  [DOCUMENT_TYPE.VACCINATION]: DOCUMENT_CATEGORY.HEALTH,
+  [DOCUMENT_TYPE.OTHER]: DOCUMENT_CATEGORY.OTHER,
 };
 
-/** The filing rule, as a function. Unknown types file under Identity. */
+/**
+ * The filing rule, as a function.
+ *
+ * An unrecognised type files under OTHER, not IDENTITY: a value this build has
+ * never heard of is by definition unclassified, and quietly filing it with
+ * passports is the worse guess. This is the path an older app build takes when
+ * the list grows.
+ */
 export function documentCategoryOf(type: string): DocumentCategory {
-  return DOCUMENT_TYPE_CATEGORY[type as DocumentType] ?? DOCUMENT_CATEGORY.IDENTITY;
+  return DOCUMENT_TYPE_CATEGORY[type as DocumentType] ?? DOCUMENT_CATEGORY.OTHER;
 }
 
 /**
