@@ -15,10 +15,10 @@ export const DOCUMENT_TYPE = {
   /** Passport, national ID card, driving licence — "my ID". */
   IDENTITY: 'identity',
   VISA: 'visa',
-  FLIGHT_TICKET: 'flight_ticket',
-  HOTEL_BOOKING: 'hotel_booking',
+  TRANSPORT: 'transport',
+  STAYS: 'stays',
   INSURANCE: 'insurance',
-  /** The catch-all: train tickets, car rental, tours, medical letters, … */
+  /** The catch-all: tours, medical letters, misc reservations, … */
   OTHER: 'other',
 } as const;
 
@@ -28,15 +28,16 @@ export type DocumentType = (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE];
 export const DOCUMENT_TYPES: readonly DocumentType[] = [
   DOCUMENT_TYPE.IDENTITY,
   DOCUMENT_TYPE.VISA,
-  DOCUMENT_TYPE.FLIGHT_TICKET,
-  DOCUMENT_TYPE.HOTEL_BOOKING,
+  DOCUMENT_TYPE.TRANSPORT,
+  DOCUMENT_TYPE.STAYS,
   DOCUMENT_TYPE.INSURANCE,
   DOCUMENT_TYPE.OTHER,
 ];
 
 export const DOCUMENT_CATEGORY = {
   IDENTITY: 'identity',
-  BOOKINGS: 'bookings',
+  TRANSPORT: 'transport',
+  STAYS: 'stays',
   INSURANCE: 'insurance',
   OTHER: 'other',
 } as const;
@@ -51,8 +52,8 @@ export type DocumentCategory = (typeof DOCUMENT_CATEGORY)[keyof typeof DOCUMENT_
 export const DOCUMENT_TYPE_CATEGORY: Readonly<Record<DocumentType, DocumentCategory>> = {
   [DOCUMENT_TYPE.IDENTITY]: DOCUMENT_CATEGORY.IDENTITY,
   [DOCUMENT_TYPE.VISA]: DOCUMENT_CATEGORY.IDENTITY,
-  [DOCUMENT_TYPE.FLIGHT_TICKET]: DOCUMENT_CATEGORY.BOOKINGS,
-  [DOCUMENT_TYPE.HOTEL_BOOKING]: DOCUMENT_CATEGORY.BOOKINGS,
+  [DOCUMENT_TYPE.TRANSPORT]: DOCUMENT_CATEGORY.TRANSPORT,
+  [DOCUMENT_TYPE.STAYS]: DOCUMENT_CATEGORY.STAYS,
   [DOCUMENT_TYPE.INSURANCE]: DOCUMENT_CATEGORY.INSURANCE,
   [DOCUMENT_TYPE.OTHER]: DOCUMENT_CATEGORY.OTHER,
 };

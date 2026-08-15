@@ -18,24 +18,25 @@ exports.DOCUMENT_TYPE = {
     /** Passport, national ID card, driving licence — "my ID". */
     IDENTITY: 'identity',
     VISA: 'visa',
-    FLIGHT_TICKET: 'flight_ticket',
-    HOTEL_BOOKING: 'hotel_booking',
+    TRANSPORT: 'transport',
+    STAYS: 'stays',
     INSURANCE: 'insurance',
-    /** The catch-all: train tickets, car rental, tours, medical letters, … */
+    /** The catch-all: tours, medical letters, misc reservations, … */
     OTHER: 'other',
 };
 /** The order the type cards are drawn in on 23f, left→right, top→bottom. */
 exports.DOCUMENT_TYPES = [
     exports.DOCUMENT_TYPE.IDENTITY,
     exports.DOCUMENT_TYPE.VISA,
-    exports.DOCUMENT_TYPE.FLIGHT_TICKET,
-    exports.DOCUMENT_TYPE.HOTEL_BOOKING,
+    exports.DOCUMENT_TYPE.TRANSPORT,
+    exports.DOCUMENT_TYPE.STAYS,
     exports.DOCUMENT_TYPE.INSURANCE,
     exports.DOCUMENT_TYPE.OTHER,
 ];
 exports.DOCUMENT_CATEGORY = {
     IDENTITY: 'identity',
-    BOOKINGS: 'bookings',
+    TRANSPORT: 'transport',
+    STAYS: 'stays',
     INSURANCE: 'insurance',
     OTHER: 'other',
 };
@@ -47,8 +48,8 @@ exports.DOCUMENT_CATEGORY = {
 exports.DOCUMENT_TYPE_CATEGORY = {
     [exports.DOCUMENT_TYPE.IDENTITY]: exports.DOCUMENT_CATEGORY.IDENTITY,
     [exports.DOCUMENT_TYPE.VISA]: exports.DOCUMENT_CATEGORY.IDENTITY,
-    [exports.DOCUMENT_TYPE.FLIGHT_TICKET]: exports.DOCUMENT_CATEGORY.BOOKINGS,
-    [exports.DOCUMENT_TYPE.HOTEL_BOOKING]: exports.DOCUMENT_CATEGORY.BOOKINGS,
+    [exports.DOCUMENT_TYPE.TRANSPORT]: exports.DOCUMENT_CATEGORY.TRANSPORT,
+    [exports.DOCUMENT_TYPE.STAYS]: exports.DOCUMENT_CATEGORY.STAYS,
     [exports.DOCUMENT_TYPE.INSURANCE]: exports.DOCUMENT_CATEGORY.INSURANCE,
     [exports.DOCUMENT_TYPE.OTHER]: exports.DOCUMENT_CATEGORY.OTHER,
 };

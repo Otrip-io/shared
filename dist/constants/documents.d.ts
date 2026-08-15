@@ -14,10 +14,10 @@ export declare const DOCUMENT_TYPE: {
     /** Passport, national ID card, driving licence — "my ID". */
     readonly IDENTITY: "identity";
     readonly VISA: "visa";
-    readonly FLIGHT_TICKET: "flight_ticket";
-    readonly HOTEL_BOOKING: "hotel_booking";
+    readonly TRANSPORT: "transport";
+    readonly STAYS: "stays";
     readonly INSURANCE: "insurance";
-    /** The catch-all: train tickets, car rental, tours, medical letters, … */
+    /** The catch-all: tours, medical letters, misc reservations, … */
     readonly OTHER: "other";
 };
 export type DocumentType = (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE];
@@ -25,7 +25,8 @@ export type DocumentType = (typeof DOCUMENT_TYPE)[keyof typeof DOCUMENT_TYPE];
 export declare const DOCUMENT_TYPES: readonly DocumentType[];
 export declare const DOCUMENT_CATEGORY: {
     readonly IDENTITY: "identity";
-    readonly BOOKINGS: "bookings";
+    readonly TRANSPORT: "transport";
+    readonly STAYS: "stays";
     readonly INSURANCE: "insurance";
     readonly OTHER: "other";
 };
