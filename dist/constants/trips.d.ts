@@ -31,6 +31,19 @@ export declare const TRIP_MEMBER_ROLES: {
     readonly VIEWER: "viewer";
 };
 export type TripMemberRole = (typeof TRIP_MEMBER_ROLES)[keyof typeof TRIP_MEMBER_ROLES];
+/**
+ * Convoy role for Ride Mode (group ride live location). Distinct from
+ * TRIP_MEMBER_ROLES, which is the PERMISSION role — rideRole is what the
+ * member does in the convoy and only affects how their pin renders on the
+ * ride map. Absent/undefined = regular rider (primary/teal pin).
+ */
+export declare const RIDE_ROLES: {
+    readonly LEAD: "lead";
+    readonly MARSHAL: "marshal";
+    readonly TAIL: "tail";
+    readonly BACKUP: "backup";
+};
+export type RideRole = (typeof RIDE_ROLES)[keyof typeof RIDE_ROLES];
 export declare const TRIP_MEMBER_STATUS: {
     readonly ACTIVE: "active";
     readonly REQUEST: "request";

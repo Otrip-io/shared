@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_VISIBILITY = void 0;
+exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
@@ -30,6 +30,18 @@ exports.TRIP_STATUS = {
 exports.TRIP_MEMBER_ROLES = {
     ADMIN: 'admin',
     VIEWER: 'viewer',
+};
+/**
+ * Convoy role for Ride Mode (group ride live location). Distinct from
+ * TRIP_MEMBER_ROLES, which is the PERMISSION role — rideRole is what the
+ * member does in the convoy and only affects how their pin renders on the
+ * ride map. Absent/undefined = regular rider (primary/teal pin).
+ */
+exports.RIDE_ROLES = {
+    LEAD: 'lead',
+    MARSHAL: 'marshal',
+    TAIL: 'tail',
+    BACKUP: 'backup',
 };
 exports.TRIP_MEMBER_STATUS = {
     ACTIVE: 'active',
