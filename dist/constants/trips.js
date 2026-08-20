@@ -1,10 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_VISIBILITY = void 0;
+exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_CHAT_MODE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
     PRIVATE: 'private',
+};
+/**
+ * Who can send messages in the trip chat. `announcement` = only trip admins
+ * post (WhatsApp announcement-group style) — members keep the "+" actions and
+ * reactions. Backward-compat (Work Rule 10): defaults to `chat`; old clients
+ * and existing trip documents (field absent) behave exactly as before.
+ */
+exports.TRIP_CHAT_MODE = {
+    CHAT: 'chat',
+    ANNOUNCEMENT: 'announcement',
 };
 /**
  * A trip's kind. Behind the scenes an expense group, a shared list, or a doc

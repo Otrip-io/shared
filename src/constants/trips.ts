@@ -6,6 +6,19 @@ export const TRIP_VISIBILITY = {
 export type TripVisibility = (typeof TRIP_VISIBILITY)[keyof typeof TRIP_VISIBILITY];
 
 /**
+ * Who can send messages in the trip chat. `announcement` = only trip admins
+ * post (WhatsApp announcement-group style) — members keep the "+" actions and
+ * reactions. Backward-compat (Work Rule 10): defaults to `chat`; old clients
+ * and existing trip documents (field absent) behave exactly as before.
+ */
+export const TRIP_CHAT_MODE = {
+  CHAT: 'chat',
+  ANNOUNCEMENT: 'announcement',
+} as const;
+
+export type TripChatMode = (typeof TRIP_CHAT_MODE)[keyof typeof TRIP_CHAT_MODE];
+
+/**
  * A trip's kind. Behind the scenes an expense group, a shared list, or a doc
  * is just a Trip with a single active module — one entity, one members model,
  * one offline-sync path. `trip` is the full multi-module travel trip (the only
