@@ -59,13 +59,32 @@ exports.TRIP_MEMBER_STATUS = {
     INVITE: 'invite',
 };
 exports.MAX_TRIP_MEMBERS = 50;
+/**
+ * Trip dates are CALENDAR DAYS. A string input is either "YYYY-MM-DD" or the
+ * serialized UTC-midnight instant "YYYY-MM-DDT00:00:00.000Z" — both encode a
+ * day, so both are parsed as the viewer's LOCAL day. Passing them straight to
+ * `new Date()` made a trip start (and its status flip) a day early for every
+ * user west of UTC.
+ */
+function parseTripDay(value, endOfDay) {
+    const day = typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)
+        ? value.slice(0, 10)
+        : null;
+    const d = day
+        ? new Date(Number(day.slice(0, 4)), Number(day.slice(5, 7)) - 1, Number(day.slice(8, 10)))
+        : new Date(value);
+    if (endOfDay)
+        d.setHours(23, 59, 59, 999);
+    else
+        d.setHours(0, 0, 0, 0);
+    return d;
+}
 function getTripStatus(startDate, endDate) {
     if (!startDate || !endDate)
         return exports.TRIP_STATUS.PLANNING;
     const now = new Date();
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    end.setHours(23, 59, 59, 999);
+    const start = parseTripDay(startDate, false);
+    const end = parseTripDay(endDate, true);
     if (start > now)
         return exports.TRIP_STATUS.PLANNING;
     if (end >= now)
