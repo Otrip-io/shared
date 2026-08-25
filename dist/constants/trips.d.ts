@@ -63,3 +63,20 @@ export declare const TRIP_MEMBER_STATUS: {
 export type TripMemberStatus = (typeof TRIP_MEMBER_STATUS)[keyof typeof TRIP_MEMBER_STATUS];
 export declare const MAX_TRIP_MEMBERS = 50;
 export declare function getTripStatus(startDate: Date | string | null | undefined, endDate: Date | string | null | undefined): TripStatus;
+export type CountdownUnit = 'day' | 'week' | 'month' | 'year';
+export interface TripCountdown {
+    unit: CountdownUnit;
+    /** Always >= 1. */
+    count: number;
+}
+/**
+ * Human-scaled countdown from whole days ahead — the unit a person would say:
+ * "in 3 days", "in 2 weeks", "in 8 months", "in 1 year". Used by every
+ * trip-start countdown on web and mobile (the compact "249d" it replaces was
+ * a code-only invention; the design language is "starts in 3 days").
+ *
+ * <7 → days · <30 → weeks · <365 → months (12 rounded months roll to 1 year) ·
+ * else years. Pure: the caller localises via ICU plural keys, because
+ * Intl.RelativeTimeFormat is not reliable on Hermes.
+ */
+export declare function tripCountdown(days: number): TripCountdown;

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_CHAT_MODE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
+exports.tripCountdown = tripCountdown;
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
     PRIVATE: 'private',
@@ -90,4 +91,30 @@ function getTripStatus(startDate, endDate) {
     if (end >= now)
         return exports.TRIP_STATUS.ACTIVE;
     return exports.TRIP_STATUS.COMPLETED;
+}
+const DAYS_PER_WEEK = 7;
+const DAYS_PER_MONTH = 30.44;
+const DAYS_PER_YEAR = 365.25;
+/**
+ * Human-scaled countdown from whole days ahead — the unit a person would say:
+ * "in 3 days", "in 2 weeks", "in 8 months", "in 1 year". Used by every
+ * trip-start countdown on web and mobile (the compact "249d" it replaces was
+ * a code-only invention; the design language is "starts in 3 days").
+ *
+ * <7 → days · <30 → weeks · <365 → months (12 rounded months roll to 1 year) ·
+ * else years. Pure: the caller localises via ICU plural keys, because
+ * Intl.RelativeTimeFormat is not reliable on Hermes.
+ */
+function tripCountdown(days) {
+    // NaN/∞ clamp too: Math.max(1, NaN) is NaN, which would render "In NaN years".
+    const d = Number.isFinite(days) ? Math.max(1, Math.round(days)) : 1;
+    if (d < DAYS_PER_WEEK)
+        return { unit: 'day', count: d };
+    if (d < 30)
+        return { unit: 'week', count: Math.max(1, Math.round(d / DAYS_PER_WEEK)) };
+    if (d < DAYS_PER_YEAR) {
+        const months = Math.max(1, Math.round(d / DAYS_PER_MONTH));
+        return months >= 12 ? { unit: 'year', count: 1 } : { unit: 'month', count: months };
+    }
+    return { unit: 'year', count: Math.max(1, Math.round(d / DAYS_PER_YEAR)) };
 }
