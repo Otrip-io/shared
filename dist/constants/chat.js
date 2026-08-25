@@ -24,6 +24,14 @@ exports.MESSAGE_TYPES = {
      * what lets it reuse the chat engine's outbox, seq ordering and live updates.
      */
     POLL: 'poll',
+    /**
+     * An SOS from a member: a location snapshot + optional note, rendered as a
+     * red card. One immutable message row (no votes, no edits) riding the same
+     * relay/outbox as text; `content` always carries readable text so builds
+     * that don't know the type still show a plain bubble. Server-side it
+     * bypasses trip mute + push cooldown for admins.
+     */
+    EMERGENCY: 'emergency',
 };
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 exports.MAX_MESSAGE_ATTACHMENTS = 30;
