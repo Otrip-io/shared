@@ -30,6 +30,17 @@ export declare const MESSAGE_TYPES: {
      * bypasses trip mute + push cooldown for admins.
      */
     readonly EMERGENCY: "emergency";
+    /**
+     * A trip idea — a proposed destination or activity the group votes Yes/No
+     * on. Like POLL, one message row carrying a structured payload (`idea`
+     * subdoc: kind, place details, raw voter-id lists, status) rendered as one
+     * card. When ≥70% of active members vote yes the server creates the plan
+     * item (locked) and the card resolves to "Added to plan"; when 70% becomes
+     * unreachable it resolves to "Not added". `content` carries the title so
+     * builds that don't know the type still show a plain bubble. Trip
+     * conversations only.
+     */
+    readonly IDEA: "idea";
 };
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 export declare const MAX_MESSAGE_ATTACHMENTS = 30;
