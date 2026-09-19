@@ -41,6 +41,17 @@ export declare const MESSAGE_TYPES: {
      * conversations only.
      */
     readonly IDEA: "idea";
+    /**
+     * A sticker. One immutable message row carrying `{ packId, stickerId }` —
+     * two short ids and never a url, because the artwork is bundled in the app.
+     * That is what lets a sticker render instantly, cost no storage and send
+     * offline.
+     *
+     * `content` always carries the sticker's stand-in emoji, so a build that
+     * predates this type shows that emoji rather than an empty bubble, and the
+     * chat-list preview and push notification keep working there too.
+     */
+    readonly STICKER: "sticker";
 };
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 export declare const MAX_MESSAGE_ATTACHMENTS = 30;
