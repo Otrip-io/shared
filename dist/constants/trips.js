@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_CHAT_MODE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.tripCountdown = tripCountdown;
+const clubs_1 = require("./clubs");
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
     PRIVATE: 'private',
@@ -32,6 +33,8 @@ exports.TRIP_TYPE = {
     EXPENSE: 'expense',
     LIST: 'list',
     DOCS: 'docs',
+    /** A club — see `constants/clubs.ts`. Never public; hidden from builds without the clubs capability. */
+    CLUB: 'club',
 };
 exports.TRIP_STATUS = {
     PLANNING: 'planning',
@@ -40,6 +43,8 @@ exports.TRIP_STATUS = {
 };
 exports.TRIP_MEMBER_ROLES = {
     ADMIN: 'admin',
+    /** Clubs only: helps the one admin run the club (requests, removals, events, pins, tags). */
+    MODERATOR: 'moderator',
     VIEWER: 'viewer',
 };
 /**
@@ -59,7 +64,11 @@ exports.TRIP_MEMBER_STATUS = {
     REQUEST: 'request',
     INVITE: 'invite',
 };
-exports.MAX_TRIP_MEMBERS = 50;
+/**
+ * Members per trip — the same 1,000 as a club (user decision 2026-09-26: no
+ * separate trip cap). Kept as its own name so every existing import stays valid.
+ */
+exports.MAX_TRIP_MEMBERS = clubs_1.MAX_GROUP_MEMBERS;
 /**
  * Trip dates are CALENDAR DAYS. A string input is either "YYYY-MM-DD" or the
  * serialized UTC-midnight instant "YYYY-MM-DDT00:00:00.000Z" — both encode a

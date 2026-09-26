@@ -1,3 +1,5 @@
+import { MAX_GROUP_MEMBERS } from './clubs';
+
 export const TRIP_VISIBILITY = {
   PUBLIC: 'public',
   PRIVATE: 'private',
@@ -33,6 +35,8 @@ export const TRIP_TYPE = {
   EXPENSE: 'expense',
   LIST: 'list',
   DOCS: 'docs',
+  /** A club — see `constants/clubs.ts`. Never public; hidden from builds without the clubs capability. */
+  CLUB: 'club',
 } as const;
 
 export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
@@ -47,6 +51,8 @@ export type TripStatus = (typeof TRIP_STATUS)[keyof typeof TRIP_STATUS];
 
 export const TRIP_MEMBER_ROLES = {
   ADMIN: 'admin',
+  /** Clubs only: helps the one admin run the club (requests, removals, events, pins, tags). */
+  MODERATOR: 'moderator',
   VIEWER: 'viewer',
 } as const;
 
@@ -75,7 +81,11 @@ export const TRIP_MEMBER_STATUS = {
 
 export type TripMemberStatus = (typeof TRIP_MEMBER_STATUS)[keyof typeof TRIP_MEMBER_STATUS];
 
-export const MAX_TRIP_MEMBERS = 50;
+/**
+ * Members per trip — the same 1,000 as a club (user decision 2026-09-26: no
+ * separate trip cap). Kept as its own name so every existing import stays valid.
+ */
+export const MAX_TRIP_MEMBERS = MAX_GROUP_MEMBERS;
 
 /**
  * Trip dates are CALENDAR DAYS. A string input is either "YYYY-MM-DD" or the

@@ -27,3 +27,4 @@ __exportStar(require("./users"), exports);
 __exportStar(require("./transactions"), exports);
 __exportStar(require("./admin"), exports);
 __exportStar(require("./ai"), exports);
+__exportStar(require("./clubs"), exports);

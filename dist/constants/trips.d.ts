@@ -29,6 +29,8 @@ export declare const TRIP_TYPE: {
     readonly EXPENSE: "expense";
     readonly LIST: "list";
     readonly DOCS: "docs";
+    /** A club — see `constants/clubs.ts`. Never public; hidden from builds without the clubs capability. */
+    readonly CLUB: "club";
 };
 export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
 export declare const TRIP_STATUS: {
@@ -39,6 +41,8 @@ export declare const TRIP_STATUS: {
 export type TripStatus = (typeof TRIP_STATUS)[keyof typeof TRIP_STATUS];
 export declare const TRIP_MEMBER_ROLES: {
     readonly ADMIN: "admin";
+    /** Clubs only: helps the one admin run the club (requests, removals, events, pins, tags). */
+    readonly MODERATOR: "moderator";
     readonly VIEWER: "viewer";
 };
 export type TripMemberRole = (typeof TRIP_MEMBER_ROLES)[keyof typeof TRIP_MEMBER_ROLES];
@@ -61,7 +65,11 @@ export declare const TRIP_MEMBER_STATUS: {
     readonly INVITE: "invite";
 };
 export type TripMemberStatus = (typeof TRIP_MEMBER_STATUS)[keyof typeof TRIP_MEMBER_STATUS];
-export declare const MAX_TRIP_MEMBERS = 50;
+/**
+ * Members per trip — the same 1,000 as a club (user decision 2026-09-26: no
+ * separate trip cap). Kept as its own name so every existing import stays valid.
+ */
+export declare const MAX_TRIP_MEMBERS = 1000;
 export declare function getTripStatus(startDate: Date | string | null | undefined, endDate: Date | string | null | undefined): TripStatus;
 export type CountdownUnit = 'day' | 'week' | 'month' | 'year';
 export interface TripCountdown {

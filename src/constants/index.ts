@@ -11,3 +11,4 @@ export * from './users';
 export * from './transactions';
 export * from './admin';
 export * from './ai';
+export * from './clubs';
