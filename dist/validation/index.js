@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./patterns"), exports);
 __exportStar(require("./reserved-usernames"), exports);
+__exportStar(require("./club-links"), exports);
