@@ -54,6 +54,13 @@ export const MESSAGE_TYPES = {
    * chat-list preview and push notification keep working there too.
    */
   STICKER: 'sticker',
+  /**
+   * A club event's card in the club chat, posted by the server when a manager
+   * creates an event. Carries `event: { eventId }` and nothing else — the
+   * phone draws the card from its own events table. Club chats only, so a
+   * build without the clubs capability never receives one.
+   */
+  EVENT: 'event',
 } as const;
 
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
