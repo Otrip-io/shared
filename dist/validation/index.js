@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./patterns"), exports);
 __exportStar(require("./reserved-usernames"), exports);
 __exportStar(require("./club-links"), exports);
+__exportStar(require("./events"), exports);

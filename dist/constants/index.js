@@ -28,3 +28,4 @@ __exportStar(require("./transactions"), exports);
 __exportStar(require("./admin"), exports);
 __exportStar(require("./ai"), exports);
 __exportStar(require("./clubs"), exports);
+__exportStar(require("./events"), exports);
