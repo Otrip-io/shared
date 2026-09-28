@@ -63,3 +63,17 @@ export declare const MESSAGE_TYPES: {
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 export declare const MAX_MESSAGE_ATTACHMENTS = 30;
 export type MessageType = (typeof MESSAGE_TYPES)[keyof typeof MESSAGE_TYPES];
+/**
+ * Pinned messages (trip chats, club chats, DMs). A pin is conversation state,
+ * never a message: at most this many at once, each kept for one of the
+ * durations below and hidden everywhere once it runs out.
+ */
+export declare const MAX_CHAT_PINS = 3;
+/** How long a pin stays, in milliseconds — the three choices in the Pin sheet. */
+export declare const CHAT_PIN_DURATIONS: {
+    readonly '24h': number;
+    readonly '7d': number;
+    readonly '30d': number;
+};
+export type ChatPinDuration = keyof typeof CHAT_PIN_DURATIONS;
+export declare const DEFAULT_CHAT_PIN_DURATION: ChatPinDuration;

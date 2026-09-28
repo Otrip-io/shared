@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_MESSAGE_ATTACHMENTS = exports.MESSAGE_TYPES = exports.CONVERSATION_TYPES = void 0;
+exports.DEFAULT_CHAT_PIN_DURATION = exports.CHAT_PIN_DURATIONS = exports.MAX_CHAT_PINS = exports.MAX_MESSAGE_ATTACHMENTS = exports.MESSAGE_TYPES = exports.CONVERSATION_TYPES = void 0;
 exports.CONVERSATION_TYPES = {
     DIRECT: 'DIRECT',
     GROUP: 'GROUP',
@@ -64,3 +64,16 @@ exports.MESSAGE_TYPES = {
 };
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 exports.MAX_MESSAGE_ATTACHMENTS = 30;
+/**
+ * Pinned messages (trip chats, club chats, DMs). A pin is conversation state,
+ * never a message: at most this many at once, each kept for one of the
+ * durations below and hidden everywhere once it runs out.
+ */
+exports.MAX_CHAT_PINS = 3;
+/** How long a pin stays, in milliseconds — the three choices in the Pin sheet. */
+exports.CHAT_PIN_DURATIONS = {
+    '24h': 24 * 60 * 60 * 1000,
+    '7d': 7 * 24 * 60 * 60 * 1000,
+    '30d': 30 * 24 * 60 * 60 * 1000,
+};
+exports.DEFAULT_CHAT_PIN_DURATION = '7d';
