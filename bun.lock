@@ -4,12 +4,17 @@
   "workspaces": {
     "": {
       "name": "@otrip/shared",
+      "dependencies": {
+        "obscenity": "0.4.6",
+      },
       "devDependencies": {
         "typescript": "5.7.3",
       },
     },
   },
   "packages": {
+    "obscenity": ["obscenity@0.4.6", "", {}, "sha512-pHk7kNN7j3L3zGhhGnwxjvXIGsPpLrcZl2r58fqWh/V/rH6b/dafscj2sMmAY+A/9/wPsocLmimgGk2DKeKsFQ=="],
+
     "typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
   }
 }
