@@ -88,3 +88,18 @@ export interface TripCountdown {
  * Intl.RelativeTimeFormat is not reliable on Hermes.
  */
 export declare function tripCountdown(days: number): TripCountdown;
+/**
+ * Who sees a member's emergency info in one trip (plan G4): the trip's
+ * admins, everyone in it, or nobody. A membership with no choice reads as
+ * `all` — today's behaviour, so nothing changes silently. During the
+ * member's own SOS (EMERGENCY_SOS_SHARE_HOURS) everyone sees it anyway.
+ * Clubs never carry emergency info at all (plan S1).
+ */
+export declare const EMERGENCY_VISIBILITIES: readonly ["admins", "all", "off"];
+export type EmergencyVisibility = (typeof EMERGENCY_VISIBILITIES)[number];
+export declare const EMERGENCY_VISIBILITY_DEFAULT: EmergencyVisibility;
+/** Trips made from a public event start members on `admins` (strangers meet there). */
+export declare const EMERGENCY_VISIBILITY_EVENT_TRIP: EmergencyVisibility;
+/** How long after sending an SOS a member's info is shown to the whole trip. */
+export declare const EMERGENCY_SOS_SHARE_HOURS = 24;
+export declare function isEmergencyVisibility(v: unknown): v is EmergencyVisibility;

@@ -153,3 +153,22 @@ export function tripCountdown(days: number): TripCountdown {
   }
   return { unit: 'year', count: Math.max(1, Math.round(d / DAYS_PER_YEAR)) };
 }
+
+/**
+ * Who sees a member's emergency info in one trip (plan G4): the trip's
+ * admins, everyone in it, or nobody. A membership with no choice reads as
+ * `all` — today's behaviour, so nothing changes silently. During the
+ * member's own SOS (EMERGENCY_SOS_SHARE_HOURS) everyone sees it anyway.
+ * Clubs never carry emergency info at all (plan S1).
+ */
+export const EMERGENCY_VISIBILITIES = ['admins', 'all', 'off'] as const;
+export type EmergencyVisibility = (typeof EMERGENCY_VISIBILITIES)[number];
+export const EMERGENCY_VISIBILITY_DEFAULT: EmergencyVisibility = 'all';
+/** Trips made from a public event start members on `admins` (strangers meet there). */
+export const EMERGENCY_VISIBILITY_EVENT_TRIP: EmergencyVisibility = 'admins';
+/** How long after sending an SOS a member's info is shown to the whole trip. */
+export const EMERGENCY_SOS_SHARE_HOURS = 24;
+
+export function isEmergencyVisibility(v: unknown): v is EmergencyVisibility {
+  return typeof v === 'string' && (EMERGENCY_VISIBILITIES as readonly string[]).includes(v);
+}

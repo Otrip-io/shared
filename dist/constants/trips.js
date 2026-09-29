@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_CHAT_MODE = exports.TRIP_VISIBILITY = void 0;
+exports.EMERGENCY_SOS_SHARE_HOURS = exports.EMERGENCY_VISIBILITY_EVENT_TRIP = exports.EMERGENCY_VISIBILITY_DEFAULT = exports.EMERGENCY_VISIBILITIES = exports.MAX_TRIP_MEMBERS = exports.TRIP_MEMBER_STATUS = exports.RIDE_ROLES = exports.TRIP_MEMBER_ROLES = exports.TRIP_STATUS = exports.TRIP_TYPE = exports.TRIP_CHAT_MODE = exports.TRIP_VISIBILITY = void 0;
 exports.getTripStatus = getTripStatus;
 exports.tripCountdown = tripCountdown;
+exports.isEmergencyVisibility = isEmergencyVisibility;
 const clubs_1 = require("./clubs");
 exports.TRIP_VISIBILITY = {
     PUBLIC: 'public',
@@ -126,4 +127,20 @@ function tripCountdown(days) {
         return months >= 12 ? { unit: 'year', count: 1 } : { unit: 'month', count: months };
     }
     return { unit: 'year', count: Math.max(1, Math.round(d / DAYS_PER_YEAR)) };
+}
+/**
+ * Who sees a member's emergency info in one trip (plan G4): the trip's
+ * admins, everyone in it, or nobody. A membership with no choice reads as
+ * `all` — today's behaviour, so nothing changes silently. During the
+ * member's own SOS (EMERGENCY_SOS_SHARE_HOURS) everyone sees it anyway.
+ * Clubs never carry emergency info at all (plan S1).
+ */
+exports.EMERGENCY_VISIBILITIES = ['admins', 'all', 'off'];
+exports.EMERGENCY_VISIBILITY_DEFAULT = 'all';
+/** Trips made from a public event start members on `admins` (strangers meet there). */
+exports.EMERGENCY_VISIBILITY_EVENT_TRIP = 'admins';
+/** How long after sending an SOS a member's info is shown to the whole trip. */
+exports.EMERGENCY_SOS_SHARE_HOURS = 24;
+function isEmergencyVisibility(v) {
+    return typeof v === 'string' && exports.EMERGENCY_VISIBILITIES.includes(v);
 }
