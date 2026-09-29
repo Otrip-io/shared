@@ -80,8 +80,8 @@ export declare const CLUB_TAG_PRESETS: readonly [{
     readonly name: "Supporter";
     readonly color: "teal";
 }, {
-    readonly key: "veteran";
-    readonly name: "Veteran";
+    readonly key: "senior";
+    readonly name: "Senior member";
     readonly color: "zinc";
 }];
 export type ClubTagPresetKey = (typeof CLUB_TAG_PRESETS)[number]['key'];

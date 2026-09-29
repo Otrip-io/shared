@@ -64,7 +64,7 @@ export const CLUB_TAG_PRESETS = [
   { key: 'mechanic', name: 'Mechanic', color: 'zinc' },
   { key: 'photographer', name: 'Photographer', color: 'blue' },
   { key: 'supporter', name: 'Supporter', color: 'teal' },
-  { key: 'veteran', name: 'Veteran', color: 'zinc' },
+  { key: 'senior', name: 'Senior member', color: 'zinc' },
 ] as const satisfies readonly { key: string; name: string; color: ClubTagColor }[];
 
 export type ClubTagPresetKey = (typeof CLUB_TAG_PRESETS)[number]['key'];
