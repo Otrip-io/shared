@@ -35,3 +35,56 @@ export declare const CLIENT_CAPS: {
 export type ClientCap = (typeof CLIENT_CAPS)[keyof typeof CLIENT_CAPS];
 /** The error code a caps-less phone gets when it reaches a club. */
 export declare const APP_UPDATE_REQUIRED = "APP_UPDATE_REQUIRED";
+/**
+ * Member tags — labels only, never powers. Every club has the ready-made ones
+ * (named in each reader's own language on the phone; the English here is for
+ * the server's duplicate check); the admin adds up to MAX_CLUB_CUSTOM_TAGS of
+ * the club's own. A member shows up to MAX_MEMBER_TAGS.
+ */
+export declare const CLUB_TAG_COLORS: readonly ["teal", "green", "amber", "blue", "red", "zinc"];
+export type ClubTagColor = (typeof CLUB_TAG_COLORS)[number];
+export declare const CLUB_TAG_PRESETS: readonly [{
+    readonly key: "founding";
+    readonly name: "Founding member";
+    readonly color: "amber";
+}, {
+    readonly key: "life";
+    readonly name: "Life member";
+    readonly color: "amber";
+}, {
+    readonly key: "organizer";
+    readonly name: "Organizer";
+    readonly color: "teal";
+}, {
+    readonly key: "road_captain";
+    readonly name: "Road captain";
+    readonly color: "green";
+}, {
+    readonly key: "navigator";
+    readonly name: "Navigator";
+    readonly color: "blue";
+}, {
+    readonly key: "first_aid";
+    readonly name: "First aid";
+    readonly color: "red";
+}, {
+    readonly key: "mechanic";
+    readonly name: "Mechanic";
+    readonly color: "zinc";
+}, {
+    readonly key: "photographer";
+    readonly name: "Photographer";
+    readonly color: "blue";
+}, {
+    readonly key: "supporter";
+    readonly name: "Supporter";
+    readonly color: "teal";
+}, {
+    readonly key: "veteran";
+    readonly name: "Veteran";
+    readonly color: "zinc";
+}];
+export type ClubTagPresetKey = (typeof CLUB_TAG_PRESETS)[number]['key'];
+export declare const MAX_CLUB_CUSTOM_TAGS = 10;
+export declare const MAX_MEMBER_TAGS = 2;
+export declare const CLUB_TAG_NAME_MAX = 20;

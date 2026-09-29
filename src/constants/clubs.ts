@@ -44,3 +44,31 @@ export type ClientCap = (typeof CLIENT_CAPS)[keyof typeof CLIENT_CAPS];
 
 /** The error code a caps-less phone gets when it reaches a club. */
 export const APP_UPDATE_REQUIRED = 'APP_UPDATE_REQUIRED';
+
+/**
+ * Member tags — labels only, never powers. Every club has the ready-made ones
+ * (named in each reader's own language on the phone; the English here is for
+ * the server's duplicate check); the admin adds up to MAX_CLUB_CUSTOM_TAGS of
+ * the club's own. A member shows up to MAX_MEMBER_TAGS.
+ */
+export const CLUB_TAG_COLORS = ['teal', 'green', 'amber', 'blue', 'red', 'zinc'] as const;
+export type ClubTagColor = (typeof CLUB_TAG_COLORS)[number];
+
+export const CLUB_TAG_PRESETS = [
+  { key: 'founding', name: 'Founding member', color: 'amber' },
+  { key: 'life', name: 'Life member', color: 'amber' },
+  { key: 'organizer', name: 'Organizer', color: 'teal' },
+  { key: 'road_captain', name: 'Road captain', color: 'green' },
+  { key: 'navigator', name: 'Navigator', color: 'blue' },
+  { key: 'first_aid', name: 'First aid', color: 'red' },
+  { key: 'mechanic', name: 'Mechanic', color: 'zinc' },
+  { key: 'photographer', name: 'Photographer', color: 'blue' },
+  { key: 'supporter', name: 'Supporter', color: 'teal' },
+  { key: 'veteran', name: 'Veteran', color: 'zinc' },
+] as const satisfies readonly { key: string; name: string; color: ClubTagColor }[];
+
+export type ClubTagPresetKey = (typeof CLUB_TAG_PRESETS)[number]['key'];
+
+export const MAX_CLUB_CUSTOM_TAGS = 10;
+export const MAX_MEMBER_TAGS = 2;
+export const CLUB_TAG_NAME_MAX = 20;
