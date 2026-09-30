@@ -61,10 +61,29 @@ export const MESSAGE_TYPES = {
    * build without the clubs capability never receives one.
    */
   EVENT: 'event',
+  /**
+   * A voice message: one recorded audio file, its length and a small
+   * waveform, carried in the message's own `voice` field — NEVER in
+   * `attachments`, which a build that predates this type would draw as a
+   * broken photo tile. `content` is always "🎤 m:ss", so such a build shows
+   * that line instead, and the chat-list preview works everywhere. The file
+   * rides the chat relay like a photo: ephemeral on the server, kept on the
+   * phones that downloaded it.
+   */
+  VOICE: 'voice',
 } as const;
 
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 export const MAX_MESSAGE_ATTACHMENTS = 30;
+
+/** Voice messages: shortest kept, longest allowed (the recorder stops there). */
+export const VOICE_MIN_DURATION_MS = 500;
+export const VOICE_MAX_DURATION_MS = 15 * 60 * 1000;
+/** Waveform levels sent with a voice message, each 0..VOICE_WAVEFORM_MAX. */
+export const VOICE_WAVEFORM_BARS = 48;
+export const VOICE_WAVEFORM_MAX = 31;
+/** Largest voice file accepted: 15 min of mono AAC at ~32 kbps is ~3.6 MB. */
+export const VOICE_MAX_BYTES = 10 * 1024 * 1024;
 
 export type MessageType = (typeof MESSAGE_TYPES)[keyof typeof MESSAGE_TYPES];
 
