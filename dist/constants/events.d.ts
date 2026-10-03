@@ -1,10 +1,12 @@
 /**
- * Club events (Phase 4). An event is its own module keyed by a container —
- * v1 knows one container, a club (`containerType: 'club'`). Everything the
- * phone checks as the admin types and the server enforces on every write
- * lives here, so the two can never drift.
+ * Events (Phase 4). An event is its own module keyed by a container — a club
+ * (`containerType: 'club'`, run by its admin and moderators), or a personal
+ * event's own space (`'event'`, a trip document of type `event` whose one
+ * admin is the host; added 2026-10-03). Everything the phone checks as the
+ * host types and the server enforces on every write lives here, so the two
+ * can never drift.
  */
-export declare const EVENT_CONTAINER_TYPES: readonly ["club"];
+export declare const EVENT_CONTAINER_TYPES: readonly ["club", "event"];
 export type EventContainerType = (typeof EVENT_CONTAINER_TYPES)[number];
 export declare const EVENT_KINDS: readonly ["physical", "online"];
 export type EventKind = (typeof EVENT_KINDS)[number];
@@ -26,8 +28,10 @@ export declare const EVENT_CAPACITY_MAX = 100000;
 export declare const EVENT_MAX_DAYS = 30;
 /** Anti-spam: scheduled events of one club that have not ended yet. */
 export declare const MAX_UPCOMING_EVENTS_PER_CLUB = 50;
+/** Anti-spam: scheduled personal events one person hosts that have not ended yet. */
+export declare const MAX_UPCOMING_EVENTS_PER_HOST = 10;
 export declare const MAX_EVENT_PHOTOS = 30;
-/** The attendee list an event carries (Going first, then Maybe). The counts are always complete. */
+/** The attendee list an event carries (Going first, then Maybe, then Can't). The counts are always complete. */
 export declare const EVENT_ATTENDEES_MAX = 200;
 /** Anti-spam: new guest RSVPs one person may make in 24 hours. */
 export declare const GUEST_RSVPS_PER_DAY = 10;

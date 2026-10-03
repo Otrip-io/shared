@@ -1,13 +1,15 @@
 "use strict";
 /**
- * Club events (Phase 4). An event is its own module keyed by a container —
- * v1 knows one container, a club (`containerType: 'club'`). Everything the
- * phone checks as the admin types and the server enforces on every write
- * lives here, so the two can never drift.
+ * Events (Phase 4). An event is its own module keyed by a container — a club
+ * (`containerType: 'club'`, run by its admin and moderators), or a personal
+ * event's own space (`'event'`, a trip document of type `event` whose one
+ * admin is the host; added 2026-10-03). Everything the phone checks as the
+ * host types and the server enforces on every write lives here, so the two
+ * can never drift.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DEFAULT_EVENT_PREFS = exports.ALL_DAY_REMINDER_HOUR = exports.MAX_EVENT_REMINDERS = exports.EVENT_REMINDER_MINUTES = exports.QUEUED_AT_MAX_SKEW_MS = exports.EVENT_ALBUM_PREVIEW = exports.EVENT_CREATED_PUSHES_PER_DAY = exports.GUEST_RSVPS_PER_DAY = exports.EVENT_ATTENDEES_MAX = exports.MAX_EVENT_PHOTOS = exports.MAX_UPCOMING_EVENTS_PER_CLUB = exports.EVENT_MAX_DAYS = exports.EVENT_CAPACITY_MAX = exports.EVENT_ONLINE_URL_MAX = exports.EVENT_PLACE_ADDRESS_MAX = exports.EVENT_PLACE_NAME_MAX = exports.EVENT_DESCRIPTION_MAX = exports.EVENT_TITLE_MAX = exports.RSVP_ANSWERS = exports.EVENT_STATUSES = exports.EVENT_VISIBILITIES = exports.EVENT_KINDS = exports.EVENT_CONTAINER_TYPES = void 0;
-exports.EVENT_CONTAINER_TYPES = ['club'];
+exports.DEFAULT_EVENT_PREFS = exports.ALL_DAY_REMINDER_HOUR = exports.MAX_EVENT_REMINDERS = exports.EVENT_REMINDER_MINUTES = exports.QUEUED_AT_MAX_SKEW_MS = exports.EVENT_ALBUM_PREVIEW = exports.EVENT_CREATED_PUSHES_PER_DAY = exports.GUEST_RSVPS_PER_DAY = exports.EVENT_ATTENDEES_MAX = exports.MAX_EVENT_PHOTOS = exports.MAX_UPCOMING_EVENTS_PER_HOST = exports.MAX_UPCOMING_EVENTS_PER_CLUB = exports.EVENT_MAX_DAYS = exports.EVENT_CAPACITY_MAX = exports.EVENT_ONLINE_URL_MAX = exports.EVENT_PLACE_ADDRESS_MAX = exports.EVENT_PLACE_NAME_MAX = exports.EVENT_DESCRIPTION_MAX = exports.EVENT_TITLE_MAX = exports.RSVP_ANSWERS = exports.EVENT_STATUSES = exports.EVENT_VISIBILITIES = exports.EVENT_KINDS = exports.EVENT_CONTAINER_TYPES = void 0;
+exports.EVENT_CONTAINER_TYPES = ['club', 'event'];
 exports.EVENT_KINDS = ['physical', 'online'];
 /** `club` = members only (the default on every new event); `public` = anyone opens it and may go as a guest. */
 exports.EVENT_VISIBILITIES = ['club', 'public'];
@@ -24,8 +26,10 @@ exports.EVENT_CAPACITY_MAX = 100_000;
 exports.EVENT_MAX_DAYS = 30;
 /** Anti-spam: scheduled events of one club that have not ended yet. */
 exports.MAX_UPCOMING_EVENTS_PER_CLUB = 50;
+/** Anti-spam: scheduled personal events one person hosts that have not ended yet. */
+exports.MAX_UPCOMING_EVENTS_PER_HOST = 10;
 exports.MAX_EVENT_PHOTOS = 30;
-/** The attendee list an event carries (Going first, then Maybe). The counts are always complete. */
+/** The attendee list an event carries (Going first, then Maybe, then Can't). The counts are always complete. */
 exports.EVENT_ATTENDEES_MAX = 200;
 /** Anti-spam: new guest RSVPs one person may make in 24 hours. */
 exports.GUEST_RSVPS_PER_DAY = 10;

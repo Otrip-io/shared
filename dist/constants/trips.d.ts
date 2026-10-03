@@ -38,6 +38,13 @@ export declare const TRIP_TYPE: {
      * trip ones), where the same ride mode works, so those members can still ride.
      */
     readonly RIDE: "ride";
+    /**
+     * A personal event (2026-10-03): a private space holding ONE event — the
+     * people its host invites are its members, and it has a chat. Shown by a
+     * build that does not know the kind as an ordinary trip with that chat
+     * (the live 2.8.1 has no events at all).
+     */
+    readonly EVENT: "event";
 };
 export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
 export declare const TRIP_STATUS: {
