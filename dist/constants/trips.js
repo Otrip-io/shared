@@ -36,6 +36,13 @@ exports.TRIP_TYPE = {
     DOCS: 'docs',
     /** A club — see `constants/clubs.ts`. Never public; hidden from builds without the clubs capability. */
     CLUB: 'club',
+    /**
+     * A group ride (2026-10-03): a private space whose whole screen is the live
+     * members map. NOT hidden from older builds — one that does not know the
+     * kind shows it as an ordinary trip (its row and screen fall back to the
+     * trip ones), where the same ride mode works, so those members can still ride.
+     */
+    RIDE: 'ride',
 };
 exports.TRIP_STATUS = {
     PLANNING: 'planning',

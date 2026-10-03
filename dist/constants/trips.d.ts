@@ -31,6 +31,13 @@ export declare const TRIP_TYPE: {
     readonly DOCS: "docs";
     /** A club — see `constants/clubs.ts`. Never public; hidden from builds without the clubs capability. */
     readonly CLUB: "club";
+    /**
+     * A group ride (2026-10-03): a private space whose whole screen is the live
+     * members map. NOT hidden from older builds — one that does not know the
+     * kind shows it as an ordinary trip (its row and screen fall back to the
+     * trip ones), where the same ride mode works, so those members can still ride.
+     */
+    readonly RIDE: "ride";
 };
 export type TripType = (typeof TRIP_TYPE)[keyof typeof TRIP_TYPE];
 export declare const TRIP_STATUS: {
