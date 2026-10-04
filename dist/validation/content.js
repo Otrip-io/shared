@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasBlockedWords = hasBlockedWords;
+exports.findEnglishBlockedSpans = findEnglishBlockedSpans;
 const obscenity_1 = require("obscenity");
+const places_allow_1 = require("./wordlists/places-allow");
 /**
  * Words a public name may not carry (store rules on user content): club names,
  * handles and descriptions, event titles and descriptions. English only — the
@@ -22,8 +24,19 @@ const matcher = new obscenity_1.RegExpMatcher({
     ...built,
     ...obscenity_1.englishRecommendedTransformers,
     // Adds to the dataset's own allow-list; replacing it would refuse Arsenal, Cumberland, Assembly…
-    whitelistedTerms: [...(built.whitelistedTerms ?? []), ...ALLOWED],
+    // PLACE_ALLOW: 418 real place names with a flagged word inside them (Kodaikanal, Slutsk), measured 2026-10-04.
+    whitelistedTerms: [...(built.whitelistedTerms ?? []), ...ALLOWED, ...places_allow_1.PLACE_ALLOW],
 });
 function hasBlockedWords(text) {
     return !!text && matcher.hasMatch(text);
+}
+/** Where the English list matched, as offsets into the text as typed (end exclusive) — for highlighting. */
+function findEnglishBlockedSpans(text) {
+    if (!text)
+        return [];
+    return matcher.getAllMatches(text, true).map((m) => ({
+        start: m.startIndex,
+        end: m.endIndex + 1,
+        text: text.slice(m.startIndex, m.endIndex + 1),
+    }));
 }

@@ -38,6 +38,8 @@ export const CLUB_LIMIT_PRO = 5;
 export const CLIENT_CAPS_HEADER = 'x-client-caps';
 export const CLIENT_CAPS = {
   CLUBS: 'clubs',
+  /** Country communities: a phone without it never gets community data or alerts. */
+  COMMUNITIES: 'communities',
 } as const;
 
 export type ClientCap = (typeof CLIENT_CAPS)[keyof typeof CLIENT_CAPS];

@@ -1,4 +1,5 @@
 import { RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
+import { PLACE_ALLOW } from './wordlists/places-allow';
 
 /**
  * Words a public name may not carry (store rules on user content): club names,
@@ -21,9 +22,20 @@ const matcher = new RegExpMatcher({
   ...built,
   ...englishRecommendedTransformers,
   // Adds to the dataset's own allow-list; replacing it would refuse Arsenal, Cumberland, Assembly…
-  whitelistedTerms: [...(built.whitelistedTerms ?? []), ...ALLOWED],
+  // PLACE_ALLOW: 418 real place names with a flagged word inside them (Kodaikanal, Slutsk), measured 2026-10-04.
+  whitelistedTerms: [...(built.whitelistedTerms ?? []), ...ALLOWED, ...PLACE_ALLOW],
 });
 
 export function hasBlockedWords(text: string | null | undefined): boolean {
   return !!text && matcher.hasMatch(text);
+}
+
+/** Where the English list matched, as offsets into the text as typed (end exclusive) — for highlighting. */
+export function findEnglishBlockedSpans(text: string | null | undefined): { start: number; end: number; text: string }[] {
+  if (!text) return [];
+  return matcher.getAllMatches(text, true).map((m) => ({
+    start: m.startIndex,
+    end: m.endIndex + 1,
+    text: text.slice(m.startIndex, m.endIndex + 1),
+  }));
 }

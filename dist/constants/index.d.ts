@@ -14,3 +14,4 @@ export * from './ai';
 export * from './clubs';
 export * from './events';
 export * from './fund';
+export * from './communities';

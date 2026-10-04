@@ -31,6 +31,8 @@ export declare const CLUB_LIMIT_PRO = 5;
 export declare const CLIENT_CAPS_HEADER = "x-client-caps";
 export declare const CLIENT_CAPS: {
     readonly CLUBS: "clubs";
+    /** Country communities: a phone without it never gets community data or alerts. */
+    readonly COMMUNITIES: "communities";
 };
 export type ClientCap = (typeof CLIENT_CAPS)[keyof typeof CLIENT_CAPS];
 /** The error code a caps-less phone gets when it reaches a club. */

@@ -19,3 +19,4 @@ __exportStar(require("./reserved-usernames"), exports);
 __exportStar(require("./club-links"), exports);
 __exportStar(require("./events"), exports);
 __exportStar(require("./content"), exports);
+__exportStar(require("./community"), exports);

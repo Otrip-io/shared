@@ -34,6 +34,8 @@ exports.CLUB_LIMIT_PRO = 5;
 exports.CLIENT_CAPS_HEADER = 'x-client-caps';
 exports.CLIENT_CAPS = {
     CLUBS: 'clubs',
+    /** Country communities: a phone without it never gets community data or alerts. */
+    COMMUNITIES: 'communities',
 };
 /** The error code a caps-less phone gets when it reaches a club. */
 exports.APP_UPDATE_REQUIRED = 'APP_UPDATE_REQUIRED';
