@@ -69,6 +69,15 @@ export declare const MESSAGE_TYPES: {
      * phones that downloaded it.
      */
     readonly VOICE: "voice";
+    /**
+     * A file — a PDF, a Word file, any document (shared into Otrip from another
+     * app). Like VOICE, it rides its own `file` field (name, mime, size), NEVER
+     * `attachments`, which a build that predates this type would draw as a
+     * broken photo tile. `content` is always "📄 <name>", so such a build shows
+     * that line, and the chat-list preview and push work everywhere. The file
+     * rides the chat relay: ephemeral on the server, downloaded on a tap.
+     */
+    readonly FILE: "file";
 };
 /** WhatsApp's cap, and ours. Enforced in the DTO and the picker. */
 export declare const MAX_MESSAGE_ATTACHMENTS = 30;
