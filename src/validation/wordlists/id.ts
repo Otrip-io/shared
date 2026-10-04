@@ -1,0 +1,42 @@
+/**
+ * Blocked words — Indonesian and Malay. Sources: bad-word-indonesia (Afrizal Muhammad Yasin), MIT. See CREDITS.md.
+ * Only the clearly vulgar entries were kept; the source also lists everyday words. Measured against everyday Tatoeba sentences, 4 Oct 2026.
+ * Syntax: a plain entry is a whole word ("x*" starts a word, "*x" ends one, "*x*" is inside one); a space makes a phrase.
+ */
+export const ID_WORDS: readonly string[] = [
+  "bajingan",
+  "bangsat",
+  "bencong",
+  "bokep",
+  "burit",
+  "cukimai",
+  "cukimay",
+  "dancuk",
+  "itil",
+  "jablai",
+  "jablay",
+  "jancok",
+  "jancuk",
+  "jembut",
+  "kampang",
+  "kancut",
+  "kanjut",
+  "keparat",
+  "kimak",
+  "kontol",
+  "lancap",
+  "lonte",
+  "maho",
+  "memek",
+  "ngecrot",
+  "ngentot",
+  "ngewe",
+  "pantek",
+  "pecun",
+  "pepek",
+  "perek",
+  "puki",
+  "pukimak",
+  "sepong",
+  "toket",
+];

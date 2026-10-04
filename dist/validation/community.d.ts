@@ -3,12 +3,13 @@
  * post goes live is a word list, run on the phone as you type and again on the
  * server — no AI service. English uses `obscenity` (content.ts); other
  * languages use free published lists (wordlists/CREDITS.md), matched as WHOLE
- * words only. Measured on our 173,185 place names: matching inside words
- * blocked 240 places — "Pakistan" itself included — whole words blocked 4.
- * Each community checks only its own languages, so a city like Lund stays
- * fine in Sweden.
+ * words unless an entry says otherwise. Measured on our 173,185 place names:
+ * matching inside words blocked 240 places — "Pakistan" itself included —
+ * whole words blocked 4. Each list was then measured on everyday sentences
+ * (Tatoeba, 3.3 million across 25 lists) and cut until it blocks swearing
+ * only: at most 0.17% of sentences, every one of them a real swear.
  */
-export type CommunityWordLang = 'en' | 'ur' | 'ur-Latn' | 'ar';
+export type CommunityWordLang = 'en' | 'ur' | 'ur-Latn' | 'ar' | 'cs' | 'da' | 'de' | 'el' | 'es' | 'fi' | 'fil' | 'fr' | 'hi' | 'hu' | 'id' | 'it' | 'ja' | 'ko' | 'ms' | 'nl' | 'no' | 'pl' | 'pt' | 'ru' | 'sv' | 'th' | 'tr' | 'uk' | 'zh';
 /** The word lists a country's community checks. English always. */
 export declare function communityWordLangs(countryCode: string | null | undefined): readonly CommunityWordLang[];
 /** One word in the form both the lists and the text are compared in. */
