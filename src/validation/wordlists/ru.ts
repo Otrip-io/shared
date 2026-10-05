@@ -315,7 +315,6 @@ export const RU_WORDS: readonly string[] = [
   "ebalnik",
   "ebalo",
   "ebalom sch'elkat",
-  "gol",
   "mudack",
   "opizdenet",
   "osto'eblo",

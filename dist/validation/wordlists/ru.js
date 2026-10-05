@@ -318,7 +318,6 @@ exports.RU_WORDS = [
     "ebalnik",
     "ebalo",
     "ebalom sch'elkat",
-    "gol",
     "mudack",
     "opizdenet",
     "osto'eblo",

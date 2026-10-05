@@ -1,15 +1,17 @@
 /**
  * Community posts and replies (design 2026-10-04): the only check before a
  * post goes live is a word list, run on the phone as you type and again on the
- * server — no AI service. English uses `obscenity` (content.ts); other
- * languages use free published lists (wordlists/CREDITS.md), matched as WHOLE
- * words unless an entry says otherwise. Measured on our 173,185 place names:
+ * server — no AI service. Every language, English included, uses a free
+ * published list (wordlists/CREDITS.md), matched as WHOLE words unless an
+ * entry says otherwise. (Public names — clubs, events — keep `obscenity` in
+ * content.ts; here it matched inside other languages' everyday words:
+ * Spanish "cumpleaños", Indonesian "tinggal", Russian "дороги".) Measured on our 173,185 place names:
  * matching inside words blocked 240 places — "Pakistan" itself included —
  * whole words blocked 4. Each list was then measured on everyday sentences
  * (Tatoeba, 3.3 million across 25 lists) and cut until it blocks swearing
  * only: at most 0.17% of sentences, every one of them a real swear.
  */
-export type CommunityWordLang = 'en' | 'ur' | 'ur-Latn' | 'ar' | 'cs' | 'da' | 'de' | 'el' | 'es' | 'fi' | 'fil' | 'fr' | 'hi' | 'hu' | 'id' | 'it' | 'ja' | 'ko' | 'ms' | 'nl' | 'no' | 'pl' | 'pt' | 'ru' | 'sv' | 'th' | 'tr' | 'uk' | 'zh';
+export type CommunityWordLang = 'en' | 'ur' | 'ur-Latn' | 'ar' | 'cs' | 'da' | 'de' | 'el' | 'es' | 'fi' | 'fil' | 'fr' | 'hi' | 'hu' | 'id' | 'it' | 'ja' | 'ko' | 'ms' | 'nl' | 'no' | 'pl' | 'pt' | 'ro' | 'ru' | 'sv' | 'th' | 'tr' | 'uk' | 'zh';
 /** The word lists a country's community checks. English always. */
 export declare function communityWordLangs(countryCode: string | null | undefined): readonly CommunityWordLang[];
 /** One word in the form both the lists and the text are compared in. */

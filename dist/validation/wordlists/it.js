@@ -43,7 +43,6 @@ exports.IT_WORDS = [
     "ciucciami il cazzo",
     "coglione",
     "coglioni",
-    "cozza",
     "culattina",
     "culattone",
     "culo",

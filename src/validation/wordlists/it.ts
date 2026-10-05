@@ -40,7 +40,6 @@ export const IT_WORDS: readonly string[] = [
   "ciucciami il cazzo",
   "coglione",
   "coglioni",
-  "cozza",
   "culattina",
   "culattone",
   "culo",

@@ -1,8 +1,9 @@
-import { findEnglishBlockedSpans } from './content';
 import { USERNAME_REGEX } from './patterns';
 import { UR_LATN_WORDS } from './wordlists/ur-latn';
 import { UR_WORDS } from './wordlists/ur';
 import { AR_WORDS } from './wordlists/ar';
+import { EN_WORDS } from './wordlists/en';
+import { COMMUNITY_PLACES } from './wordlists/community-places';
 import { CS_WORDS } from './wordlists/cs';
 import { DA_WORDS } from './wordlists/da';
 import { DE_WORDS } from './wordlists/de';
@@ -31,9 +32,11 @@ import { ZH_WORDS } from './wordlists/zh';
 /**
  * Community posts and replies (design 2026-10-04): the only check before a
  * post goes live is a word list, run on the phone as you type and again on the
- * server — no AI service. English uses `obscenity` (content.ts); other
- * languages use free published lists (wordlists/CREDITS.md), matched as WHOLE
- * words unless an entry says otherwise. Measured on our 173,185 place names:
+ * server — no AI service. Every language, English included, uses a free
+ * published list (wordlists/CREDITS.md), matched as WHOLE words unless an
+ * entry says otherwise. (Public names — clubs, events — keep `obscenity` in
+ * content.ts; here it matched inside other languages' everyday words:
+ * Spanish "cumpleaños", Indonesian "tinggal", Russian "дороги".) Measured on our 173,185 place names:
  * matching inside words blocked 240 places — "Pakistan" itself included —
  * whole words blocked 4. Each list was then measured on everyday sentences
  * (Tatoeba, 3.3 million across 25 lists) and cut until it blocks swearing
@@ -41,12 +44,13 @@ import { ZH_WORDS } from './wordlists/zh';
  */
 export type CommunityWordLang =
   | 'en' | 'ur' | 'ur-Latn' | 'ar' | 'cs' | 'da' | 'de' | 'el' | 'es' | 'fi' | 'fil' | 'fr' | 'hi' | 'hu'
-  | 'id' | 'it' | 'ja' | 'ko' | 'ms' | 'nl' | 'no' | 'pl' | 'pt' | 'ru' | 'sv' | 'th' | 'tr' | 'uk' | 'zh';
+  | 'id' | 'it' | 'ja' | 'ko' | 'ms' | 'nl' | 'no' | 'pl' | 'pt' | 'ro' | 'ru' | 'sv' | 'th' | 'tr' | 'uk' | 'zh';
 
 /**
  * Where each list applies: the languages people there write in. English is
  * checked everywhere. No free list yet for Hebrew, Romanian or Vietnamese —
- * those communities get English plus the Otrip team's own words.
+ * those communities get English plus the Otrip team's own words (Romanian is
+ * listed only for its allowances below).
  */
 const LANG_COUNTRIES: ReadonlyArray<readonly [Exclude<CommunityWordLang, 'en'>, string]> = [
   ['ur-Latn', 'PK IN'],
@@ -72,6 +76,7 @@ const LANG_COUNTRIES: ReadonlyArray<readonly [Exclude<CommunityWordLang, 'en'>, 
   ['no', 'NO'],
   ['pl', 'PL'],
   ['pt', 'AO BR CV GW MZ PT ST TL'],
+  ['ro', 'MD RO'],
   ['ru', 'BY KG KZ RU UA'],
   ['sv', 'FI SE'],
   ['th', 'TH'],
@@ -83,6 +88,26 @@ const COUNTRY_WORD_LANGS = new Map<string, CommunityWordLang[]>();
 for (const [lang, countries] of LANG_COUNTRIES) {
   for (const cc of countries.split(' ')) COUNTRY_WORD_LANGS.set(cc, [...(COUNTRY_WORD_LANGS.get(cc) ?? ['en']), lang]);
 }
+
+/**
+ * Everyday words of a language that another list in the same community would
+ * refuse — measured on everyday sentences: Swedish "mutta"/"olla" are the
+ * Finnish "but"/"to be", French "bitte" is German "please", the English
+ * list's "slut" is Swedish and Danish for "end", "cum" Romanian for "how",
+ * "paki" Tagalog for "please", "fag" Norwegian and Danish for a school
+ * subject, the Arabic list's "کس" Urdu for "which".
+ * They pass wherever that language is spoken.
+ */
+const LANG_ALLOW: Partial<Record<CommunityWordLang, readonly string[]>> = {
+  da: ['slut', 'fag'],
+  de: ['bitte'],
+  fi: ['mutta', 'olla'],
+  fil: ['paki'],
+  no: ['fag'],
+  ro: ['cum', 'făget', 'faget'],
+  sv: ['slut'],
+  ur: ['کس'],
+};
 
 /** The word lists a country's community checks. English always. */
 export function communityWordLangs(countryCode: string | null | undefined): readonly CommunityWordLang[] {
@@ -144,7 +169,8 @@ function buildList(words: readonly string[]): WordList {
   return list;
 }
 
-const SOURCES: Record<Exclude<CommunityWordLang, 'en'>, readonly string[]> = {
+const SOURCES: Record<CommunityWordLang, readonly string[]> = {
+  en: EN_WORDS,
   'ur-Latn': UR_LATN_WORDS,
   ur: UR_WORDS,
   ar: AR_WORDS,
@@ -168,6 +194,7 @@ const SOURCES: Record<Exclude<CommunityWordLang, 'en'>, readonly string[]> = {
   no: NO_WORDS,
   pl: PL_WORDS,
   pt: PT_WORDS,
+  ro: [],
   ru: RU_WORDS,
   sv: SV_WORDS,
   th: TH_WORDS,
@@ -176,7 +203,7 @@ const SOURCES: Record<Exclude<CommunityWordLang, 'en'>, readonly string[]> = {
   zh: ZH_WORDS,
 };
 const built = new Map<string, WordList>();
-function listFor(lang: Exclude<CommunityWordLang, 'en'>): WordList {
+function listFor(lang: CommunityWordLang): WordList {
   let list = built.get(lang);
   if (!list) {
     list = buildList(SOURCES[lang]);
@@ -221,15 +248,17 @@ export interface BlockedSpan {
   text: string;
 }
 
-const WORD_CHAR = /[\p{L}\p{M}0-9@$*]/u;
-
-/** The English list matches a root ("fuck" in "fucking"); the composer underlines the whole word to take out. */
-function wholeWord(text: string, start: number, end: number): BlockedSpan {
-  let s = start;
-  let e = end;
-  while (s > 0 && WORD_CHAR.test(text[s - 1])) s--;
-  while (e < text.length && WORD_CHAR.test(text[e])) e++;
-  return { start: s, end: e, text: text.slice(s, e) };
+let places: string[][] | null = null;
+/** Indexes of the tokens that spell out a real place's whole name (wordlists/community-places.ts). */
+function placeTokens(tokens: Token[]): Set<number> {
+  places ??= COMMUNITY_PLACES.map((p) => tokenize(p).map((t) => t.norm));
+  const out = new Set<number>();
+  tokens.forEach((_, i) => {
+    for (const place of places ?? []) {
+      if (place.every((part, k) => tokens[i + k]?.norm === part)) place.forEach((_p, k) => out.add(i + k));
+    }
+  });
+  return out;
 }
 
 /** Staff additions from Admin → Community settings, synced to phones. */
@@ -248,21 +277,16 @@ export function findCommunityBlockedSpans(
   extras?: CommunityWordExtras,
 ): BlockedSpan[] {
   if (!text) return [];
-  const allow = new Set((extras?.allow ?? []).map(normalizeCommunityWord));
+  const allow = new Set([...(extras?.allow ?? []), ...langs.flatMap((l) => LANG_ALLOW[l] ?? [])].map(normalizeCommunityWord));
   const spans: BlockedSpan[] = [];
-  if (langs.includes('en')) {
-    for (const s of findEnglishBlockedSpans(text)) {
-      const whole = wholeWord(text, s.start, s.end);
-      if (!allow.has(normalizeCommunityWord(whole.text))) spans.push(whole);
-    }
-  }
-  const lists: WordList[] = langs.filter((l): l is Exclude<CommunityWordLang, 'en'> => l !== 'en').map(listFor);
+  const lists: WordList[] = langs.map(listFor);
   if (extras?.words?.length) lists.push(buildList(extras.words));
   if (lists.length) {
     const tokens = tokenize(text);
+    const inPlace = placeTokens(tokens);
     const whole = (tok: Token) => spans.push({ start: tok.start, end: tok.end, text: text.slice(tok.start, tok.end) });
     tokens.forEach((tok, i) => {
-      if (allow.has(tok.norm)) return;
+      if (allow.has(tok.norm) || inPlace.has(i)) return;
       for (const list of lists) {
         const w = tok.norm;
         if (forms(w).some((f) => list.single.has(f)) || list.starts.some((s) => w.startsWith(s)) || list.ends.some((s) => w.endsWith(s))) {
