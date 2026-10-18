@@ -73,3 +73,42 @@ export const DEFAULT_EVENT_PREFS: Readonly<EventPrefs> = Object.freeze({
   online: [15],
   maybe: true,
 });
+
+/**
+ * Paid events (design paid-events, approved 2026-10-18). Otrip never moves
+ * money: a price per spot, the host's "how to pay" and refund policy, a
+ * receipt photo with each Going, and the admin or a treasurer (a personal
+ * event: the host) confirming it. Amounts are integers of the currency's
+ * smallest unit (`currencyMinorUnits`, fund.ts).
+ */
+export const EVENT_HOW_TO_PAY_MAX = 500;
+export const EVENT_REFUND_POLICY_MAX = 500;
+/** A typo guard on the price, in minor units. */
+export const EVENT_PRICE_MAX_MINOR = 100_000_000;
+
+/** A Going on a paid event: `waiting` holds a spot until someone checks the receipt. */
+export const EVENT_PAYMENT_STATES = ['waiting', 'confirmed', 'rejected'] as const;
+export type EventPaymentState = (typeof EVENT_PAYMENT_STATES)[number];
+/** What a checker picks to reject (the club fund's own reasons). */
+export const EVENT_REJECT_REASONS = ['not_received', 'wrong_amount', 'already_paid', 'other'] as const;
+/** Set by the server when a waiting receipt can no longer be checked. */
+export const EVENT_AUTO_REJECT_REASONS = ['cancelled', 'removed'] as const;
+export type EventRejectReason = (typeof EVENT_REJECT_REASONS)[number] | (typeof EVENT_AUTO_REJECT_REASONS)[number];
+export const EVENT_REJECT_NOTE_MAX = 200;
+
+/** Someone who paid and lost their spot is owed money until it is marked. */
+export const EVENT_REFUND_STATES = ['due', 'refunded'] as const;
+export type EventRefundState = (typeof EVENT_REFUND_STATES)[number];
+export const EVENT_REFUND_REASONS = ['gave_up', 'removed', 'left_club', 'cancelled'] as const;
+export type EventRefundReason = (typeof EVENT_REFUND_REASONS)[number];
+export const EVENT_REFUND_NOTE_MAX = 200;
+
+/** Whoever confirmed may take it back this long; the person's alert and the fund entry wait for it. */
+export const EVENT_CONFIRM_UNDO_MS = 10 * 60 * 1000;
+/** A receipt nobody has checked this long nudges the checkers once. */
+export const EVENT_RECEIPT_NUDGE_MS = 2 * 24 * 60 * 60 * 1000;
+/** Receipts are deleted this long after the event ends (or after its last refund is marked, if later). */
+export const EVENT_RECEIPT_KEEP_DAYS = 90;
+
+/** An event's cover may be a photo or a video up to this long (user, 2026-10-18). */
+export const EVENT_COVER_VIDEO_MAX_SECONDS = 60;

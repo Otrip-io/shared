@@ -60,3 +60,37 @@ export interface EventPrefs {
 }
 /** What a person gets before they ever open Settings → Events. */
 export declare const DEFAULT_EVENT_PREFS: Readonly<EventPrefs>;
+/**
+ * Paid events (design paid-events, approved 2026-10-18). Otrip never moves
+ * money: a price per spot, the host's "how to pay" and refund policy, a
+ * receipt photo with each Going, and the admin or a treasurer (a personal
+ * event: the host) confirming it. Amounts are integers of the currency's
+ * smallest unit (`currencyMinorUnits`, fund.ts).
+ */
+export declare const EVENT_HOW_TO_PAY_MAX = 500;
+export declare const EVENT_REFUND_POLICY_MAX = 500;
+/** A typo guard on the price, in minor units. */
+export declare const EVENT_PRICE_MAX_MINOR = 100000000;
+/** A Going on a paid event: `waiting` holds a spot until someone checks the receipt. */
+export declare const EVENT_PAYMENT_STATES: readonly ["waiting", "confirmed", "rejected"];
+export type EventPaymentState = (typeof EVENT_PAYMENT_STATES)[number];
+/** What a checker picks to reject (the club fund's own reasons). */
+export declare const EVENT_REJECT_REASONS: readonly ["not_received", "wrong_amount", "already_paid", "other"];
+/** Set by the server when a waiting receipt can no longer be checked. */
+export declare const EVENT_AUTO_REJECT_REASONS: readonly ["cancelled", "removed"];
+export type EventRejectReason = (typeof EVENT_REJECT_REASONS)[number] | (typeof EVENT_AUTO_REJECT_REASONS)[number];
+export declare const EVENT_REJECT_NOTE_MAX = 200;
+/** Someone who paid and lost their spot is owed money until it is marked. */
+export declare const EVENT_REFUND_STATES: readonly ["due", "refunded"];
+export type EventRefundState = (typeof EVENT_REFUND_STATES)[number];
+export declare const EVENT_REFUND_REASONS: readonly ["gave_up", "removed", "left_club", "cancelled"];
+export type EventRefundReason = (typeof EVENT_REFUND_REASONS)[number];
+export declare const EVENT_REFUND_NOTE_MAX = 200;
+/** Whoever confirmed may take it back this long; the person's alert and the fund entry wait for it. */
+export declare const EVENT_CONFIRM_UNDO_MS: number;
+/** A receipt nobody has checked this long nudges the checkers once. */
+export declare const EVENT_RECEIPT_NUDGE_MS: number;
+/** Receipts are deleted this long after the event ends (or after its last refund is marked, if later). */
+export declare const EVENT_RECEIPT_KEEP_DAYS = 90;
+/** An event's cover may be a photo or a video up to this long (user, 2026-10-18). */
+export declare const EVENT_COVER_VIDEO_MAX_SECONDS = 60;
