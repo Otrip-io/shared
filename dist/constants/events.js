@@ -28,7 +28,8 @@ exports.EVENT_MAX_DAYS = 30;
 exports.MAX_UPCOMING_EVENTS_PER_CLUB = 50;
 /** Anti-spam: scheduled personal events one person hosts that have not ended yet. */
 exports.MAX_UPCOMING_EVENTS_PER_HOST = 10;
-exports.MAX_EVENT_PHOTOS = 30;
+/** An event album's size, photos and videos together (user, 2026-10-19: was 30). */
+exports.MAX_EVENT_PHOTOS = 20;
 /** The attendee list an event carries (Going first, then Maybe, then Can't). The counts are always complete. */
 exports.EVENT_ATTENDEES_MAX = 200;
 /** Anti-spam: new guest RSVPs one person may make in 24 hours. */
