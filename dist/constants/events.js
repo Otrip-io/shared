@@ -8,7 +8,7 @@
  * can never drift.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EVENT_COVER_VIDEO_MAX_SECONDS = exports.EVENT_RECEIPT_KEEP_DAYS = exports.EVENT_RECEIPT_NUDGE_MS = exports.EVENT_CONFIRM_UNDO_MS = exports.EVENT_REFUND_NOTE_MAX = exports.EVENT_REFUND_REASONS = exports.EVENT_REFUND_STATES = exports.EVENT_REJECT_NOTE_MAX = exports.EVENT_AUTO_REJECT_REASONS = exports.EVENT_REJECT_REASONS = exports.EVENT_PAYMENT_STATES = exports.EVENT_PRICE_MAX_MINOR = exports.EVENT_REFUND_POLICY_MAX = exports.EVENT_HOW_TO_PAY_MAX = exports.DEFAULT_EVENT_PREFS = exports.ALL_DAY_REMINDER_HOUR = exports.MAX_EVENT_REMINDERS = exports.EVENT_REMINDER_MINUTES = exports.QUEUED_AT_MAX_SKEW_MS = exports.EVENT_ALBUM_PREVIEW = exports.EVENT_CREATED_PUSHES_PER_DAY = exports.GUEST_RSVPS_PER_DAY = exports.EVENT_ATTENDEES_MAX = exports.MAX_EVENT_PHOTOS = exports.MAX_UPCOMING_EVENTS_PER_HOST = exports.MAX_UPCOMING_EVENTS_PER_CLUB = exports.EVENT_MAX_DAYS = exports.EVENT_CAPACITY_MAX = exports.EVENT_ONLINE_URL_MAX = exports.EVENT_PLACE_ADDRESS_MAX = exports.EVENT_PLACE_NAME_MAX = exports.EVENT_DESCRIPTION_MAX = exports.EVENT_TITLE_MAX = exports.RSVP_ANSWERS = exports.EVENT_STATUSES = exports.EVENT_VISIBILITIES = exports.EVENT_KINDS = exports.EVENT_CONTAINER_TYPES = void 0;
+exports.EVENT_JOIN_ANSWER_MAX = exports.EVENT_JOIN_QUESTION_MAX = exports.EVENT_COVER_VIDEO_MAX_SECONDS = exports.EVENT_RECEIPT_KEEP_DAYS = exports.EVENT_RECEIPT_NUDGE_MS = exports.EVENT_CONFIRM_UNDO_MS = exports.EVENT_REFUND_NOTE_MAX = exports.EVENT_REFUND_REASONS = exports.EVENT_REFUND_STATES = exports.EVENT_REJECT_NOTE_MAX = exports.EVENT_AUTO_REJECT_REASONS = exports.EVENT_REJECT_REASONS = exports.EVENT_PAYMENT_STATES = exports.EVENT_PRICE_MAX_MINOR = exports.EVENT_REFUND_POLICY_MAX = exports.EVENT_HOW_TO_PAY_MAX = exports.DEFAULT_EVENT_PREFS = exports.ALL_DAY_REMINDER_HOUR = exports.MAX_EVENT_REMINDERS = exports.EVENT_REMINDER_MINUTES = exports.QUEUED_AT_MAX_SKEW_MS = exports.EVENT_ALBUM_PREVIEW = exports.EVENT_CREATED_PUSHES_PER_DAY = exports.GUEST_RSVPS_PER_DAY = exports.EVENT_ATTENDEES_MAX = exports.MAX_EVENT_PHOTOS = exports.MAX_UPCOMING_EVENTS_PER_HOST = exports.MAX_UPCOMING_EVENTS_PER_CLUB = exports.EVENT_MAX_DAYS = exports.EVENT_CAPACITY_MAX = exports.EVENT_ONLINE_URL_MAX = exports.EVENT_PLACE_ADDRESS_MAX = exports.EVENT_PLACE_NAME_MAX = exports.EVENT_DESCRIPTION_MAX = exports.EVENT_TITLE_MAX = exports.RSVP_ANSWERS = exports.EVENT_STATUSES = exports.EVENT_VISIBILITIES = exports.EVENT_KINDS = exports.EVENT_CONTAINER_TYPES = void 0;
 exports.EVENT_CONTAINER_TYPES = ['club', 'event'];
 exports.EVENT_KINDS = ['physical', 'online'];
 /** `club` = members only (the default on every new event); `public` = anyone opens it and may go as a guest. */
@@ -85,3 +85,13 @@ exports.EVENT_RECEIPT_NUDGE_MS = 2 * 24 * 60 * 60 * 1000;
 exports.EVENT_RECEIPT_KEEP_DAYS = 90;
 /** An event's cover may be a photo or a video up to this long (user, 2026-10-18). */
 exports.EVENT_COVER_VIDEO_MAX_SECONDS = 60;
+/**
+ * An event's join questions and answers are short, so its guest-list PDF can
+ * print every answer in its own column on two lines (design event-export-pdf,
+ * user 2026-10-21 — measured: a 126 pt column holds 42+ characters on two
+ * lines in every script tested). Trips and clubs keep JOIN_QUESTION_MAX_LENGTH
+ * and JOIN_ANSWER_MAX_LENGTH. Counted with `textWeight`: a wide (CJK)
+ * character counts as two.
+ */
+exports.EVENT_JOIN_QUESTION_MAX = 60;
+exports.EVENT_JOIN_ANSWER_MAX = 40;

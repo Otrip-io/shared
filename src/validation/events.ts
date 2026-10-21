@@ -64,3 +64,29 @@ export function resolveEventPrefs(stored: Partial<EventPrefs> | null | undefined
     maybe: typeof stored?.maybe === 'boolean' ? stored.maybe : DEFAULT_EVENT_PREFS.maybe,
   }
 }
+
+/** Wide characters — hangul, CJK ideographs, kana, fullwidth forms — print about twice as wide as a Latin letter. */
+const WIDE = /[\u1100-\u115F\u2E80-\u303E\u3041-\u33FF\u3400-\u4DBF\u4E00-\u9FFF\uA960-\uA97F\uAC00-\uD7A3\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFF60\uFFE0-\uFFE6]/
+
+/**
+ * A text's length for the event join limits (EVENT_JOIN_QUESTION_MAX,
+ * EVENT_JOIN_ANSWER_MAX): a wide character counts as two, anything else as
+ * one per code point.
+ */
+export function textWeight(text: string): number {
+  let n = 0
+  for (const ch of text) n += WIDE.test(ch) ? 2 : 1
+  return n
+}
+
+/** The longest start of `text` that fits `max` by `textWeight` — what a field keeps as someone types past the limit. */
+export function clampToWeight(text: string, max: number): string {
+  let n = 0
+  let out = ''
+  for (const ch of text) {
+    n += WIDE.test(ch) ? 2 : 1
+    if (n > max) break
+    out += ch
+  }
+  return out
+}

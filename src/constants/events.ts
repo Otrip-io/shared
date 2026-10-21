@@ -113,3 +113,14 @@ export const EVENT_RECEIPT_KEEP_DAYS = 90;
 
 /** An event's cover may be a photo or a video up to this long (user, 2026-10-18). */
 export const EVENT_COVER_VIDEO_MAX_SECONDS = 60;
+
+/**
+ * An event's join questions and answers are short, so its guest-list PDF can
+ * print every answer in its own column on two lines (design event-export-pdf,
+ * user 2026-10-21 — measured: a 126 pt column holds 42+ characters on two
+ * lines in every script tested). Trips and clubs keep JOIN_QUESTION_MAX_LENGTH
+ * and JOIN_ANSWER_MAX_LENGTH. Counted with `textWeight`: a wide (CJK)
+ * character counts as two.
+ */
+export const EVENT_JOIN_QUESTION_MAX = 60;
+export const EVENT_JOIN_ANSWER_MAX = 40;
